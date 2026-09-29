@@ -1,0 +1,118 @@
+{
+  "persons": [
+    {
+      "entityId": "E-DEMO-MARCUS",
+      "fullName": "Marcus D Reyes",
+      "name": {
+        "firstName": "Marcus",
+        "middleName": "D",
+        "lastName": "Reyes",
+        "suffix": ""
+      },
+      "age": 41,
+      "dob": "12/XX/1985",
+      "addresses": [
+        {
+          "addressHash": "A-MR-1",
+          "fullAddress": "1201 W 6th St, Austin, TX 78703",
+          "houseNumber": "1201",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "5/1/2017",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-MR-2",
+          "fullAddress": "900 Bagby St, Houston, TX 77002",
+          "houseNumber": "900",
+          "city": "Houston",
+          "state": "TX",
+          "zip": "77002",
+          "firstReportedDate": "1/1/2011",
+          "lastReportedDate": "4/1/2017",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(512) 555-0101",
+          "company": "AT&T Mobility",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "m.reyes@example.com",
+        "m.reyes@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-STERLING-VAUGHN",
+          "firstName": "Sterling",
+          "middleName": "",
+          "lastName": "Vaughn",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-MR-SP",
+          "firstName": "Dana",
+          "middleName": "",
+          "lastName": "Reyes",
+          "suffix": "",
+          "relativeType": "Spouse",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [
+            "HH-MR"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-MR-PA",
+          "firstName": "Iris",
+          "middleName": "",
+          "lastName": "Reyes",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ab",
+          "score": 200,
+          "sharedHouseholdIds": [],
+          "city": "Houston",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Marcus",
+          "middleName": "",
+          "lastName": "Reyes"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-DEMO-MARCUS",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}

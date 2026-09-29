@@ -1,0 +1,118 @@
+{
+  "persons": [
+    {
+      "entityId": "E-VIVIAN-CRANE",
+      "fullName": "Vivian L Crane",
+      "name": {
+        "firstName": "Vivian",
+        "middleName": "L",
+        "lastName": "Crane",
+        "suffix": ""
+      },
+      "age": 52,
+      "dob": "5/XX/1974",
+      "addresses": [
+        {
+          "addressHash": "A-VC-1",
+          "fullAddress": "500 W 2nd St, Austin, TX 78703",
+          "houseNumber": "500",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "6/1/2014",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-VC-2",
+          "fullAddress": "1000 Smith St, Houston, TX 77002",
+          "houseNumber": "1000",
+          "city": "Houston",
+          "state": "TX",
+          "zip": "77002",
+          "firstReportedDate": "1/1/2008",
+          "lastReportedDate": "5/1/2014",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(512) 555-0107",
+          "company": "Spectrum",
+          "phoneType": "Landline",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "v.crane@example.com",
+        "v.crane@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-STERLING-VAUGHN",
+          "firstName": "Sterling",
+          "middleName": "",
+          "lastName": "Vaughn",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Houston",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-DEMO-MARCUS",
+          "firstName": "Marcus",
+          "middleName": "",
+          "lastName": "Reyes",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-VC-SP",
+          "firstName": "Adele",
+          "middleName": "",
+          "lastName": "Crane",
+          "suffix": "",
+          "relativeType": "Spouse",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [
+            "HH-VC"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Vivian",
+          "middleName": "",
+          "lastName": "Crane"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-VIVIAN-CRANE",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}

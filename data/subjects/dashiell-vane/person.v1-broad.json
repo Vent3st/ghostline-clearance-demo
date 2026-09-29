@@ -1,0 +1,103 @@
+{
+  "persons": [
+    {
+      "entityId": "E-DASHIELL-VANE",
+      "fullName": "Dashiell Vane",
+      "name": {
+        "firstName": "Dashiell",
+        "middleName": "",
+        "lastName": "Vane",
+        "suffix": ""
+      },
+      "age": 38,
+      "dob": "3/XX/1988",
+      "addresses": [
+        {
+          "addressHash": "A-DV-1",
+          "fullAddress": "120 S Eads St, Arlington, VA 22203",
+          "houseNumber": "120",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "6/1/2018",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-DV-2",
+          "fullAddress": "1500 McKinney St, Houston, TX 77002",
+          "houseNumber": "1500",
+          "city": "Houston",
+          "state": "TX",
+          "zip": "77002",
+          "firstReportedDate": "1/1/2012",
+          "lastReportedDate": "5/1/2018",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(571) 555-0111",
+          "company": "AT&T Mobility",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "d.vane@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-CORWIN-ASHBY",
+          "firstName": "Corwin",
+          "middleName": "",
+          "lastName": "Ashby",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-DV-SP",
+          "firstName": "Lena",
+          "middleName": "",
+          "lastName": "Vane",
+          "suffix": "",
+          "relativeType": "Spouse",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [
+            "HH-DV"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Dashiell",
+          "middleName": "",
+          "lastName": "Vane"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-DASHIELL-VANE",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}

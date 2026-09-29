@@ -1,0 +1,117 @@
+{
+  "persons": [
+    {
+      "entityId": "E-CORWIN-ASHBY",
+      "fullName": "Corwin Ashby",
+      "name": {
+        "firstName": "Corwin",
+        "middleName": "",
+        "lastName": "Ashby",
+        "suffix": ""
+      },
+      "age": 34,
+      "dob": "11/XX/1992",
+      "addresses": [
+        {
+          "addressHash": "A-CA-1",
+          "fullAddress": "4001 Fred Wilson Ave, El Paso, TX 79906",
+          "houseNumber": "4001",
+          "city": "El Paso",
+          "state": "TX",
+          "zip": "79906",
+          "firstReportedDate": "9/1/2016",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-CA-2",
+          "fullAddress": "300 Boush St, Norfolk, VA 23510",
+          "houseNumber": "300",
+          "city": "Norfolk",
+          "state": "VA",
+          "zip": "23510",
+          "firstReportedDate": "1/1/2011",
+          "lastReportedDate": "8/1/2016",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(915) 555-0104",
+          "company": "T-Mobile",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "c.ashby@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-HARLAN-FROST",
+          "firstName": "Harlan",
+          "middleName": "",
+          "lastName": "Frost",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-DASHIELL-VANE",
+          "firstName": "Dashiell",
+          "middleName": "",
+          "lastName": "Vane",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-CA-SP",
+          "firstName": "Nadia",
+          "middleName": "",
+          "lastName": "Ashby",
+          "suffix": "",
+          "relativeType": "Spouse",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [
+            "HH-CA"
+          ],
+          "city": "El Paso",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Corwin",
+          "middleName": "",
+          "lastName": "Ashby"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-CORWIN-ASHBY",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}
