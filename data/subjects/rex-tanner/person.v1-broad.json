@@ -1,0 +1,117 @@
+{
+  "persons": [
+    {
+      "entityId": "E-REX-TANNER",
+      "fullName": "Rex Tanner",
+      "name": {
+        "firstName": "Rex",
+        "middleName": "",
+        "lastName": "Tanner",
+        "suffix": ""
+      },
+      "age": 39,
+      "dob": "10/XX/1987",
+      "addresses": [
+        {
+          "addressHash": "A-RT-1",
+          "fullAddress": "908 Cedar Point Dr, Round Rock, TX 78664",
+          "houseNumber": "908",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78664",
+          "firstReportedDate": "6/1/2018",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RT-2",
+          "fullAddress": "1400 Louisiana St, Houston, TX 77002",
+          "houseNumber": "1400",
+          "city": "Houston",
+          "state": "TX",
+          "zip": "77002",
+          "firstReportedDate": "1/1/2012",
+          "lastReportedDate": "5/1/2018",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(713) 555-0106",
+          "company": "AT&T Mobility",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "r.tanner@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-DEMO-TREVOR",
+          "firstName": "Trevor",
+          "middleName": "",
+          "lastName": "Osborne",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Round Rock",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-RT-SP",
+          "firstName": "Molly",
+          "middleName": "",
+          "lastName": "Tanner",
+          "suffix": "",
+          "relativeType": "Spouse",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [
+            "HH-RT"
+          ],
+          "city": "Round Rock",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-RT-SI",
+          "firstName": "Cole",
+          "middleName": "",
+          "lastName": "Tanner",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [],
+          "city": "Houston",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Rex",
+          "middleName": "",
+          "lastName": "Tanner"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-REX-TANNER",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}

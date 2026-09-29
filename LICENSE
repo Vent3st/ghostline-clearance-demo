@@ -1,0 +1,34 @@
+Ghostline Clearance Demo — Proprietary License
+Copyright (c) 2026 Ghostline. All rights reserved.
+
+This repository contains a front-end demonstration ("the Demo") published solely
+for evaluation and review (e.g. by hackathon judges). All contents — source code,
+markup, styles, layout, design, and bundled sample data — are proprietary and
+confidential.
+
+PERMITTED, strictly for the purpose of evaluating the Demo:
+  - Viewing the source in this repository.
+  - Cloning and running the Demo locally to assess it.
+
+NOT PERMITTED without prior written permission from the copyright holder:
+  - Any commercial use.
+  - Redistribution, republication, sublicensing, or hosting of the Demo or any
+    derivative, in whole or in part.
+  - Creating derivative works, or incorporating any part of this code into another
+    product or codebase.
+  - Reverse-engineering, or using this Demo to infer, reconstruct, or reproduce any
+    non-public system, method, data source, or process.
+
+THE DEMO USES FICTIONAL SAMPLE DATA ONLY. Every name, address, phone number,
+identifier, score, and record is invented for illustration. Any resemblance to a
+real person, organization, or record is coincidental. Nothing here is a background
+check, a consumer report, or advice, and it is not FCRA/DPPA/ICRAA-compliant.
+
+The collection, resolution, scoring, and data-source methods of the production
+system are NOT included in this repository and remain trade secrets.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT OF,
+OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.

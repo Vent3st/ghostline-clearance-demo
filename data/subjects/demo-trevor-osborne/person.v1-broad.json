@@ -1,0 +1,115 @@
+{
+  "persons": [
+    {
+      "entityId": "E-DEMO-TREVOR",
+      "fullName": "Trevor K Osborne",
+      "name": {
+        "firstName": "Trevor",
+        "middleName": "K",
+        "lastName": "Osborne",
+        "suffix": ""
+      },
+      "age": 45,
+      "dob": "4/XX/1981",
+      "addresses": [
+        {
+          "addressHash": "A-TO-1",
+          "fullAddress": "300 E Palm Valley Blvd, Round Rock, TX 78664",
+          "houseNumber": "300",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78664",
+          "firstReportedDate": "3/1/2016",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-TO-2",
+          "fullAddress": "78 Guadalupe St, Austin, TX 78703",
+          "houseNumber": "78",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "1/1/2009",
+          "lastReportedDate": "2/1/2016",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(512) 555-0103",
+          "company": "Verizon",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "t.osborne@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-REX-TANNER",
+          "firstName": "Rex",
+          "middleName": "",
+          "lastName": "Tanner",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Round Rock",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-NEAL-BRACKETT",
+          "firstName": "Neal",
+          "middleName": "",
+          "lastName": "Brackett",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Round Rock",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-TO-PA",
+          "firstName": "Owen",
+          "middleName": "",
+          "lastName": "Osborne",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ab",
+          "score": 200,
+          "sharedHouseholdIds": [],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Trevor",
+          "middleName": "",
+          "lastName": "Osborne"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-DEMO-TREVOR",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}

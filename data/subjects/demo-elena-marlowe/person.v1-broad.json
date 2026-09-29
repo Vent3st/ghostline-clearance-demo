@@ -1,0 +1,104 @@
+{
+  "persons": [
+    {
+      "entityId": "E-DEMO-ELENA",
+      "fullName": "Elena Marlowe",
+      "name": {
+        "firstName": "Elena",
+        "middleName": "",
+        "lastName": "Marlowe",
+        "suffix": ""
+      },
+      "age": 37,
+      "dob": "8/XX/1989",
+      "addresses": [
+        {
+          "addressHash": "A-EM-1",
+          "fullAddress": "55 Rainey St, Austin, TX 78703",
+          "houseNumber": "55",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "6/1/2019",
+          "lastReportedDate": "8/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-EM-2",
+          "fullAddress": "410 Brushy Creek Rd, Round Rock, TX 78664",
+          "houseNumber": "410",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78664",
+          "firstReportedDate": "2/1/2013",
+          "lastReportedDate": "5/1/2019",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(512) 555-0102",
+          "company": "Google Fi",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "e.marlowe@example.com",
+        "e.marlowe@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-NEAL-BRACKETT",
+          "firstName": "Neal",
+          "middleName": "",
+          "lastName": "Brackett",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 150,
+          "sharedHouseholdIds": [],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-EM-SP",
+          "firstName": "Peter",
+          "middleName": "",
+          "lastName": "Marlowe",
+          "suffix": "",
+          "relativeType": "Spouse",
+          "relativeLevel": "ab",
+          "score": 475,
+          "sharedHouseholdIds": [
+            "HH-EM"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Elena",
+          "middleName": "",
+          "lastName": "Marlowe"
+        }
+      ],
+      "associatesSummary": [],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-DEMO-ELENA",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T15:16:53.345458",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+}
