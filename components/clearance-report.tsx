@@ -176,6 +176,47 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
         </div>
       </section>
 
+      {(m.licensing.licenses.length > 0 || m.employment.length > 0) ? (
+        <section id="licensing">
+          <div className="wrap">
+            <div className="sec-head"><span className="eyebrow">Professional licensing &amp; credentials</span><h2>{m.licensing.role}.</h2><p>{m.licensing.note}</p></div>
+            {m.employment.length > 0 ? (
+              <div className="card pad" style={{ marginBottom: 14 }}>
+                <p className="chart-title">Employment &amp; affiliations</p>
+                <div className="srclist">
+                  {m.employment.map((e, i) => (
+                    <div className="sr" key={i}>
+                      <span className="n"><b>{e.company}</b>{e.title ? ` · ${e.title}` : ""}</span>
+                      <span className="m">
+                        {e.current ? <span style={{ color: "var(--good)" }}>current</span> : "former"}
+                        {e.location ? ` · ${e.location}` : ""}
+                        {e.from ? ` · ${e.from} → ${e.to ?? "present"}` : ""}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+            <div className="card pad">
+              <div className="srclist">
+                {m.licensing.licenses.map((l, i) => (
+                  <div className="sr" key={i}>
+                    <span className="n">
+                      <b>{l.name}</b> · {l.issuer} · <span style={{ fontFamily: "var(--mono)" }}>{l.id}</span>
+                    </span>
+                    <span className="m">
+                      <span style={{ color: l.status === "Expired" ? "var(--warn)" : "var(--good)" }}>{l.status}</span>
+                      {" · "}since {l.since} · {l.renews}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+
       {(m.recordsByCategory.length > 0 || m.activityByYear.length > 0) ? (
         <section id="records">
           <div className="wrap">
@@ -241,29 +282,6 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
                   <div className="sr" key={i}>
                     <span className="n"><b>{r.name}</b> · {r.relationship}{r.location ? ` · ${r.location}` : ""}</span>
                     <span className="m" style={{ color: bandColor(scoreBand(r.score)) }}>{scoreBand(r.score) ? `${scoreBand(r.score)} likelihood` : "—"}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {m.licensing.licenses.length > 0 ? (
-        <section id="licensing">
-          <div className="wrap">
-            <div className="sec-head"><span className="eyebrow">Professional licensing &amp; credentials</span><h2>{m.licensing.role}.</h2><p>{m.licensing.note}</p></div>
-            <div className="card pad">
-              <div className="srclist">
-                {m.licensing.licenses.map((l, i) => (
-                  <div className="sr" key={i}>
-                    <span className="n">
-                      <b>{l.name}</b> · {l.issuer} · <span style={{ fontFamily: "var(--mono)" }}>{l.id}</span>
-                    </span>
-                    <span className="m">
-                      <span style={{ color: l.status === "Expired" ? "var(--warn)" : "var(--good)" }}>{l.status}</span>
-                      {" · "}since {l.since} · {l.renews}
-                    </span>
                   </div>
                 ))}
               </div>

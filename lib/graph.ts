@@ -17,7 +17,7 @@ import { RAW_DIR, assertInside, isSafeSegment } from "./paths";
  * gap, not a finding of "no relationships", and callers must present it as such.
  */
 
-export type EntityKind = "person" | "address" | "phone";
+export type EntityKind = "person" | "address" | "phone" | "org";
 
 export interface GraphNode {
   id: string;
@@ -33,7 +33,7 @@ export interface GraphNode {
 export interface GraphEdge {
   source: string;
   target: string;
-  kind: "resident" | "phone" | "relative";
+  kind: "resident" | "phone" | "relative" | "employer";
   /** Relative score (100/150/475-style), not a 0–1 probability. */
   score?: number;
   label?: string;
@@ -97,6 +97,7 @@ interface RawPerson {
   age?: number;
   addresses?: RawAddress[];
   phoneNumbers?: RawPhone[];
+  employers?: { company?: string; title?: string; isCurrent?: boolean }[];
   relativesSummary?: RawRelative[];
 }
 interface RawEnvelope {
@@ -293,6 +294,29 @@ export const buildGraph = cache(async (expand?: string, only = false): Promise<S
       });
       touch(id, slug);
       edges.push({ source: anchorId, target: id, kind: "phone" });
+    }
+
+    // Employers become shared org nodes. A company that appears for two subjects is a
+    // coworker bridge, which is why the graph shows organisational ties and not just
+    // households and phones.
+    for (const em of person.employers ?? []) {
+      const co = em.company?.trim();
+      if (!co) continue;
+      const id = `o:${co.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+      addNode({
+        id,
+        kind: "org",
+        label: co,
+        subjects: [slug],
+        detail: em.title ?? undefined,
+      });
+      touch(id, slug);
+      edges.push({
+        source: anchorId,
+        target: id,
+        kind: "employer",
+        label: em.isCurrent ? "employer (current)" : "employer (former)",
+      });
     }
 
     for (const r of person.relativesSummary ?? []) {

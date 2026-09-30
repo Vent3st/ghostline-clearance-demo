@@ -146,9 +146,33 @@ export const listSubjects = cache(async (): Promise<SubjectSummary[]> => {
     Promise.all(slugs.map((slug) => readdirSafe(path.join(DATA_DIR, slug)))),
   ]);
 
+  // Pull date comes from the record envelope's requestTime. Without it a subject with
+  // no dated DOSSIER_*.md file reads as "undated" even though the pull date is on disk.
+  const pulledDates = await Promise.all(
+    slugs.map(async (slug, i) => {
+      const candidates = perSubject[i].filter((f) => f.endsWith(".json"));
+      for (const f of candidates) {
+        try {
+          const raw = JSON.parse(await fs.readFile(path.join(DATA_DIR, slug, f), "utf8")) as { requestTime?: string };
+          const t = typeof raw.requestTime === "string" ? raw.requestTime.slice(0, 10) : "";
+          if (/^\d{4}-\d{2}-\d{2}$/.test(t)) return t;
+        } catch {
+          /* unreadable or not an envelope — try the next file */
+        }
+      }
+      return null;
+    }),
+  );
+
   return slugs.map((slug, i) => {
     const dossiers = perSubject[i].filter((f) => DOSSIER_RE.test(f)).map(toDossierRef);
-    return { slug, dossiers, latest: pickLatest(dossiers), hasRaw: rawDirs.has(slug) };
+    return {
+      slug,
+      dossiers,
+      latest: pickLatest(dossiers),
+      pulled: pulledDates[i],
+      hasRaw: rawDirs.has(slug),
+    };
   });
 });
 

@@ -24,11 +24,16 @@ interface RawAddr {
   firstReportedDate?: string; lastReportedDate?: string;
 }
 interface RawPhone { phoneNumber?: string; company?: string; phoneType?: string }
+interface RawEmployer {
+  company?: string; title?: string; city?: string; state?: string;
+  fromDate?: string; toDate?: string; isCurrent?: boolean;
+}
 interface RawRel extends RawName { relativeType?: string; score?: number; city?: string; state?: string; sharedHouseholdIds?: string[] }
 interface RawPerson {
   entityId?: string; fullName?: string; name?: RawName; age?: number; dob?: string;
   addresses?: RawAddr[]; phoneNumbers?: RawPhone[]; emailAddresses?: unknown[];
   relativesSummary?: RawRel[]; akas?: RawName[];
+  employers?: RawEmployer[]; occupation?: string;
 }
 
 export interface ReportNode { id: string; label: string; kind: "person" | "address" | "phone" | "org"; x: number; y: number; pred?: boolean }
@@ -60,6 +65,9 @@ export interface ReportModel {
     entityTail: string | null;
     tenureSince: string | null;
   };
+  /** Employment history — company, role and tenure, newest first. */
+  employment: { company: string; title: string | null; location: string | null; from: string | null; to: string | null; current: boolean }[];
+  occupation: string | null;
   recordsByCategory: { label: string; count: number; tone?: "warn" }[];
   activityByYear: { year: string; count: number }[];
   graph: { nodes: ReportNode[]; edges: ReportEdge[] };
@@ -293,6 +301,17 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
     relResolved[0]?.location ?? addresses[0]?.city ?? null,
   );
 
+  const employment = (p.employers ?? [])
+    .filter((e) => e.company)
+    .map((e) => ({
+      company: e.company!,
+      title: e.title ?? null,
+      location: [e.city, e.state].filter(Boolean).join(", ") || null,
+      from: e.fromDate ?? null,
+      to: e.toDate ?? null,
+      current: Boolean(e.isCurrent),
+    }));
+
   return {
     alias,
     akas,
@@ -313,6 +332,8 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
     relatives: relResolved,
     emails,
     surface,
+    employment,
+    occupation: p.occupation ?? null,
     recordsByCategory,
     activityByYear,
     graph: { nodes, edges },
@@ -323,6 +344,7 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
       { name: "Address & property (public + licensed)", count: addresses.length, conf: "0.9" },
       { name: "Phone / contact", count: phones.length, conf: "0.86" },
       { name: "Relative / associate graph", count: relResolved.length, conf: "0.88" },
+      { name: "Employment history", count: employment.length, conf: "0.81" },
       { name: "Sanctions / LE screen", count: "0 hits", conf: "—" },
       { name: "Aggregated public & licensed records", count: "multiple sources" },
     ],

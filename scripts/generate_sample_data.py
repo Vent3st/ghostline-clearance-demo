@@ -135,6 +135,45 @@ CARRIERS = [("Verizon Wireless", "Wireless"), ("AT&T Mobility", "Wireless"),
 
 MAIL = ["example.com", "example.net", "example.org"]
 
+# profession per subject — mirrors lib/licensing.ts OVERRIDE
+ROLE_BY_SLUG = {
+    "demo-marcus-reyes": "financial_broker", "demo-elena-marlowe": "investment_adviser",
+    "demo-trevor-osborne": "real_estate",
+    "frankie-amara": "military", "hayden-amara": "defense_dod", "kit-amara": "it_cyber",
+    "marlow-amara": "government", "drew-ferro": "military", "hayden-ferro": "aviation",
+    "jordan-ferro": "defense_dod", "marlow-ferro": "it_cyber", "devon-brandt": "government",
+    "reese-brandt": "defense_dod", "skyler-brandt": "legal", "cameron-sorensen": "it_cyber",
+    "jordan-sorensen": "investment_adviser", "parker-sorensen": "it_cyber",
+    "avery-okafor": "healthcare_rn", "hayden-okafor": "government",
+    "lane-nakamura": "aviation", "lane-nakamura-77b5": "plumbing",
+    "elliot-winslow": "real_estate", "quinn-winslow": "financial_broker",
+    "devon-holloway": "legal", "marlow-holloway": "real_estate",
+    "elliot-cardoza": "plumbing", "jordan-calloway": "hedge_fund",
+    "lane-delacroix": "aviation", "riley-rivas": "military", "wren-sabin": "government",
+}
+
+# Invented employers per profession. Several are shared across subjects on purpose:
+# a shared employer is a coworker bridge, and `ReportNode.kind` already allows "org".
+EMPLOYERS = {
+    "military":           [("U.S. Army — Fort Bliss Garrison", "Logistics NCO"), ("Bliss Range Support Group", "Operations Sergeant"), ("Rio Grande Defense Logistics", "Movement Coordinator")],
+    "defense_dod":        [("Northgate Defense Systems", "Program Analyst"), ("Potomac Integration Group", "Systems Engineer"), ("Tidewater Naval Support LLC", "Configuration Manager")],
+    "it_cyber":           [("Meridian Cloud Security", "Security Engineer"), ("Lattice Data Systems", "Platform Engineer"), ("Redline Threat Labs", "Detection Engineer")],
+    "government":         [("IRS Austin Submission Processing Center", "Program Specialist"), ("General Services Administration — Region 11", "Contract Specialist"), ("Bethesda Federal Records Office", "Records Analyst")],
+    "legal":              [("Marsh & Ruiz LLP", "Associate Counsel"), ("Colley Avenue Legal Group", "Litigation Associate"), ("Congress Avenue Title Partners", "Closing Attorney")],
+    "investment_adviser": [("Barton Creek Advisors", "Portfolio Adviser"), ("Windrose Capital Partners", "Client Adviser"), ("Sunrise Wealth Group", "Financial Planner")],
+    "financial_broker":   [("Windrose Capital Partners", "Registered Representative"), ("Pecan Street Securities", "Broker"), ("Hill Country Brokerage", "Associate Broker")],
+    "hedge_fund":         [("Clarendon Alpha Management", "Research Analyst"), ("Potomac Quant Partners", "Portfolio Analyst")],
+    "real_estate":        [("Gattis Road Realty", "Managing Broker"), ("Sunrise Wealth Group", "Commercial Agent"), ("Barton Springs Property Co.", "Listing Agent")],
+    "healthcare_rn":      [("Bethesda Regional Medical Center", "Registered Nurse"), ("Walter Reed Contract Nursing Pool", "Charge Nurse")],
+    "aviation":           [("Gulf Coast Air Services", "Line Captain"), ("Hampton Roads Rotor Works", "A&P Mechanic"), ("Bergstrom Flight Support", "Dispatch Supervisor")],
+    "plumbing":           [("Tanner Mechanical Services", "Master Plumber"), ("Kirby Drive Mechanical", "Service Lead")],
+}
+
+# Distinct pull dates so no card reads "undated". Demo trio pulled today.
+PULL_DATES = ["2026-06-19", "2026-06-20", "2026-06-24", "2026-07-15", "2026-07-24",
+              "2026-08-02", "2026-08-11", "2026-08-19", "2026-09-04", "2026-09-12",
+              "2026-09-18", "2026-09-29"]
+
 BY_SLUG = {r[0]: r for r in ROSTER}
 FAM_OF = {s: fam for fam, (_, _, _, members) in FAMILIES.items() for s, _ in members}
 ROLE_OF = {s: FAMILIES[FAM_OF[s]][2] for s in BY_SLUG}
@@ -266,6 +305,26 @@ def build() -> dict[str, dict]:
             o_first, o_last = BY_SLUG[other][1].split(" ", 1)
             associates.append({"firstName": o_first, "middleName": "", "lastName": o_last})
 
+        role = ROLE_BY_SLUG[slug]
+        pool = EMPLOYERS[role]
+        n_emp = 2 if age < 35 else 3
+        start = rnd.randrange(len(pool))
+        picks = [pool[(start + k) % len(pool)] for k in range(min(n_emp, len(pool)))]
+        employers, year = [], 2026
+        for k, (co, title) in enumerate(picks):
+            to_y = year
+            from_y = max(2026 - (age - 20), to_y - rnd.randint(2, 6))
+            employers.append({
+                "company": co, "title": title,
+                "city": CITIES[home][0], "state": CITIES[home][1],
+                "fromDate": f"{rnd.randint(1,12)}/1/{from_y}",
+                "toDate": "present" if k == 0 else f"{rnd.randint(1,12)}/1/{to_y}",
+                "isCurrent": k == 0,
+            })
+            year = from_y
+        pulled = ("2026-09-29" if slug.startswith("demo-")
+                  else PULL_DATES[rnd.randrange(len(PULL_DATES))])
+
         docs[slug] = {
             "persons": [{
                 "entityId": eid(slug), "fullName": alias,
@@ -273,10 +332,11 @@ def build() -> dict[str, dict]:
                 "age": age, "dob": f"{rnd.randint(1,12)}/XX/{2026 - age}",
                 "addresses": addresses, "phoneNumbers": phones, "emailAddresses": emails,
                 "relativesSummary": rels, "akas": akas, "associatesSummary": associates,
+                "employers": employers, "occupation": picks[0][1],
                 "indicators": [], "isPublic": True, "sparseFlag": False,
             }],
             "requestId": f"DEMO-{eid(slug)}", "requestType": "Person",
-            "requestTime": "2026-09-29T00:00:00.000000", "isError": False,
+            "requestTime": f"{pulled}T09:00:00.000000", "isError": False,
             "_mock": True,
             "_note": ("FICTIONAL demo identity — invented, not a real person. Generated by "
                       "scripts/generate_sample_data.py for illustration only."),
