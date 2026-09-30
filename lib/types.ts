@@ -121,6 +121,8 @@ export interface SubjectSummary {
   dossiers: DossierRef[];
   /** Newest conventional dossier, else newest by mtime. */
   latest: DossierRef | null;
+  /** Pull date (YYYY-MM-DD) taken from the record envelope when no dated dossier file exists. */
+  pulled: string | null;
   hasRaw: boolean;
 }
 

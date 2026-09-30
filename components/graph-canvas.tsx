@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 
 import type { GraphEdge } from "@/lib/graph";
@@ -12,6 +12,7 @@ const KIND_FILL: Record<string, string> = {
   person: "var(--ent-person)",
   address: "var(--ent-address)",
   phone: "var(--ent-phone)",
+  org: "var(--ent-org)",
 };
 
 /**
@@ -50,7 +51,18 @@ const NodeGlyph = memo(function NodeGlyph({
       }}
       className="cursor-pointer focus:outline-none"
     >
-      {node.kind === "address" ? (
+      {node.kind === "org" ? (
+        <rect
+          x={-r * 0.85}
+          y={-r * 0.85}
+          width={r * 1.7}
+          height={r * 1.7}
+          rx={2}
+          fill={fill}
+          stroke={selected ? "var(--foreground)" : shared ? "var(--foreground)" : "none"}
+          strokeWidth={selected ? 2 : shared ? 1 : 0}
+        />
+      ) : node.kind === "address" ? (
         <rect
           x={node.x - r}
           y={node.y - r}
@@ -135,15 +147,157 @@ export function GraphCanvas({
       .filter((v): v is { edge: GraphEdge; other: Placed } => Boolean(v));
   }, [selected, edges, byId]);
 
+  /**
+   * Zoom / pan.
+   *
+   * The transform lives in a ref and is written straight onto the <g> with
+   * setAttribute, so a wheel tick or a drag frame costs one attribute write and
+   * zero React renders — the 300-node graph stays smooth. React state is only
+   * used for selection, which genuinely changes the tree.
+   */
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const worldRef = useRef<SVGGElement | null>(null);
+  const zoomLabelRef = useRef<HTMLSpanElement | null>(null);
+  const view = useRef({ k: 1, tx: 0, ty: 0 });
+  const drag = useRef<{ x: number; y: number; scale: number } | null>(null);
+
+  const MIN_K = 0.4;
+  const MAX_K = 8;
+
+  const apply = useCallback(() => {
+    const { k, tx, ty } = view.current;
+    worldRef.current?.setAttribute("transform", `translate(${tx} ${ty}) scale(${k})`);
+    if (zoomLabelRef.current) zoomLabelRef.current.textContent = `${Math.round(k * 100)}%`;
+  }, []);
+
+  // Wheel zoom about the pointer. Registered manually because React's onWheel is
+  // passive, and preventDefault is required to stop the page scrolling.
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const onWheel = (ev: WheelEvent) => {
+      ev.preventDefault();
+      const ctm = svg.getScreenCTM();
+      if (!ctm) return;
+      const pt = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(ctm.inverse());
+      const { k, tx, ty } = view.current;
+      const next = Math.min(MAX_K, Math.max(MIN_K, k * (ev.deltaY < 0 ? 1.12 : 1 / 1.12)));
+      if (next === k) return;
+      // Keep the point under the cursor fixed: world = (vb - t) / k.
+      view.current = {
+        k: next,
+        tx: pt.x - ((pt.x - tx) / k) * next,
+        ty: pt.y - ((pt.y - ty) / k) * next,
+      };
+      apply();
+    };
+    svg.addEventListener("wheel", onWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", onWheel);
+  }, [apply]);
+
+  const onPointerDown = useCallback((ev: React.PointerEvent<SVGSVGElement>) => {
+    if (ev.button !== 0) return;
+    const ctm = svgRef.current?.getScreenCTM();
+    drag.current = { x: ev.clientX, y: ev.clientY, scale: ctm ? ctm.a : 1 };
+    ev.currentTarget.setPointerCapture(ev.pointerId);
+  }, []);
+
+  const onPointerMove = useCallback(
+    (ev: React.PointerEvent<SVGSVGElement>) => {
+      const d = drag.current;
+      if (!d) return;
+      const s = d.scale || 1;
+      view.current.tx += (ev.clientX - d.x) / s;
+      view.current.ty += (ev.clientY - d.y) / s;
+      d.x = ev.clientX;
+      d.y = ev.clientY;
+      apply();
+    },
+    [apply],
+  );
+
+  const endDrag = useCallback(() => {
+    drag.current = null;
+  }, []);
+
+  const zoomBy = useCallback(
+    (f: number) => {
+      const svg = svgRef.current;
+      const [vx, vy, vw, vh] = viewBox.split(" ").map(Number);
+      const cx = vx + vw / 2, cy = vy + vh / 2;
+      void svg;
+      const { k, tx, ty } = view.current;
+      const next = Math.min(MAX_K, Math.max(MIN_K, k * f));
+      if (next === k) return;
+      view.current = {
+        k: next,
+        tx: cx - ((cx - tx) / k) * next,
+        ty: cy - ((cy - ty) / k) * next,
+      };
+      apply();
+    },
+    [apply, viewBox],
+  );
+
+  const resetView = useCallback(() => {
+    view.current = { k: 1, tx: 0, ty: 0 };
+    apply();
+  }, [apply]);
+
+  // A new graph (focus change) invalidates the old pan/zoom.
+  useEffect(() => {
+    view.current = { k: 1, tx: 0, ty: 0 };
+    apply();
+  }, [viewBox, apply]);
+
   return (
     <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px]">
-      <div className="min-h-0 overflow-hidden">
+      <div className="relative min-h-0 overflow-hidden">
+        <div className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded-md border bg-background/90 p-1 shadow-sm backdrop-blur">
+          <button
+            type="button"
+            onClick={() => zoomBy(1 / 1.3)}
+            aria-label="Zoom out"
+            className="size-7 rounded text-sm leading-none hover:bg-muted"
+          >
+            −
+          </button>
+          <span
+            ref={zoomLabelRef}
+            aria-live="off"
+            className="min-w-[3.25rem] text-center font-mono text-[11px] text-muted-foreground"
+          >
+            100%
+          </span>
+          <button
+            type="button"
+            onClick={() => zoomBy(1.3)}
+            aria-label="Zoom in"
+            className="size-7 rounded text-sm leading-none hover:bg-muted"
+          >
+            +
+          </button>
+          <button
+            type="button"
+            onClick={resetView}
+            aria-label="Reset zoom and position"
+            className="ml-0.5 rounded px-1.5 py-1 text-[11px] text-muted-foreground hover:bg-muted"
+          >
+            reset
+          </button>
+        </div>
         <svg
+          ref={svgRef}
           viewBox={viewBox}
-          className="size-full"
+          className="size-full touch-none [cursor:grab] active:[cursor:grabbing]"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
           role="img"
           aria-label={`Entity graph, ${nodes.length} nodes. A list view of the same data follows.`}
         >
+          <g ref={worldRef}>
           {edges.map((e, i) => {
             const a = byId.get(e.source);
             const b = byId.get(e.target);
@@ -162,6 +316,7 @@ export function GraphCanvas({
                   e.sharedHousehold ? "var(--ent-address)" : "var(--muted-foreground)"
                 }
                 strokeWidth={active ? w + 1 : w}
+                vectorEffect="non-scaling-stroke"
                 strokeDasharray={e.sharedHousehold ? undefined : "0"}
                 opacity={selected ? (active ? 0.95 : 0.15) : 0.4}
               />
@@ -202,6 +357,7 @@ export function GraphCanvas({
                 {n.label.length > 26 ? `${n.label.slice(0, 25)}…` : n.label}
               </text>
             ))}
+          </g>
         </svg>
       </div>
 

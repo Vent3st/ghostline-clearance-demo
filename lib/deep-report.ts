@@ -76,8 +76,26 @@ const METRIC_DEF: [string, string][] = [
   ["Disclosure propensity", "openness to self-report on record"],
 ];
 export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => {
-  const seeds = seedInts(slug, 10);
-  const medFI = slug === "demo-marcus-reyes";
+  const seeds = seedInts(slug, 16);
+
+  /**
+   * Adjudication profile. Deliberately spread across the roster so the demo shows
+   * a realistic mix rather than a wall of "No hits": most subjects clean, some with
+   * a reportable-but-not-disqualifying item, one in ten with an actual debarment,
+   * one in ten with an adverse regulatory or licensing action. Seeded on the slug,
+   * so a given subject always adjudicates the same way.
+   */
+  const p = seeds[10] % 10;
+  const profile: "clean" | "reportable" | "debarred" | "adverse" =
+    p <= 5 ? "clean" : p <= 7 ? "reportable" : p === 8 ? "debarred" : "adverse";
+  const medFI = profile === "reportable" || slug === "demo-marcus-reyes";
+  const hasDebar = profile === "debarred";
+  const hasAdverse = profile === "adverse";
+  const finBad = profile !== "clean" && seeds[11] % 3 === 0;
+  const inGto = profile !== "clean" && seeds[12] % 4 === 0;
+  const yDebar = 2018 + (seeds[13] % 7);
+  const ySec = 2017 + (seeds[14] % 8);
+  const yBoard = 2016 + (seeds[15] % 9);
 
   const ocean: OceanTrait[] = OCEAN_DEF.map(([key, label, notes], i) => {
     const score = 25 + (seeds[i] % 66);
@@ -106,18 +124,18 @@ export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => 
   const leChecks: Check[] = [
     { db: "OFAC SDN", result: "No hits", cite: "sanctionssearch.ofac.treas.gov" },
     { db: "OFAC Consolidated", result: "No hits", cite: "OFAC consolidated list" },
-    { db: "SAM.gov Exclusions / EPLS", result: "No hits", cite: "sam.gov" },
+    { db: "SAM.gov Exclusions / EPLS", result: hasDebar ? `1 active exclusion — ${yDebar} (FAR 9.406-2, reciprocal)` : "No hits", cite: "sam.gov" },
     { db: "FBI Most Wanted / field press", result: "No hits", cite: "fbi.gov" },
-    { db: "DOJ / USAO press", result: "No hits", cite: "justice.gov" },
-    { db: "SEC EDGAR / SALI", result: "No hits", cite: "sec.gov" },
+    { db: "DOJ / USAO press", result: hasDebar ? `1 mention — co-defendant, charges dismissed ${yDebar - 1}` : "No hits", cite: "justice.gov" },
+    { db: "SEC EDGAR / SALI", result: hasAdverse ? `1 administrative proceeding — settled ${ySec}, no admission` : "No hits", cite: "sec.gov" },
     { db: "IRS-CI press", result: "No hits", cite: "irs.gov" },
-    { db: "FinCEN GTO geography", result: "Not in a current GTO county", cite: "fincen.gov" },
+    { db: "FinCEN GTO geography", result: inGto ? "Resident in a current GTO county — reportable" : "Not in a current GTO county", cite: "fincen.gov" },
     { db: "Interpol Red Notices", result: "No hits", cite: "interpol.int" },
   ];
   const stateChecks: Check[] = [
-    { db: "State AG consumer protection", result: "No hits", cite: "state AG" },
-    { db: "County DA — major / fraud", result: "No hits", cite: "county DA" },
-    { db: "Professional-licensing boards", result: "No adverse actions", cite: "state boards" },
+    { db: "State AG consumer protection", result: hasAdverse && finBad ? `1 closed complaint — no action ${ySec}` : "No hits", cite: "state AG" },
+    { db: "County DA — major / fraud", result: hasDebar ? `1 misdemeanor — dismissed ${yDebar - 2}` : "No hits", cite: "county DA" },
+    { db: "Professional-licensing boards", result: hasAdverse ? `1 adverse action — public reprimand ${yBoard}, license retained` : "No adverse actions", cite: "state boards" },
     { db: "Sex-offender registry", result: "No hits", cite: "state registry" },
     { db: "State bar (connected counsel)", result: "Clean", cite: "state bar" },
   ];
@@ -138,27 +156,31 @@ export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => 
     { g: "B — Foreign Influence", concern: medFI ? "Foreign-resident relative (reportable §19)" : "None", sev: medFI ? "MED" : "LOW" },
     { g: "C — Foreign Preference", concern: medFI ? "Possible dual-citizen relative" : "None", sev: medFI ? "MED" : "LOW" },
     { g: "D — Sexual Behavior", concern: "None", sev: "LOW" },
-    { g: "E — Personal Conduct", concern: "None", sev: "LOW" },
-    { g: "F — Financial", concern: "None", sev: "LOW" },
+    { g: "E — Personal Conduct", concern: hasAdverse ? `Regulatory action on record (${ySec}), self-reported` : "None", sev: hasAdverse ? "MED" : "LOW" },
+    { g: "F — Financial", concern: finBad ? "Delinquency >120d on a closed account (resolved)" : "None", sev: finBad ? "MED" : "LOW" },
     { g: "G — Alcohol", concern: "None", sev: "LOW" },
     { g: "H — Drugs", concern: "None", sev: "LOW" },
     { g: "I — Psychological", concern: "None", sev: "LOW" },
-    { g: "J — Criminal", concern: "None", sev: "LOW" },
+    { g: "J — Criminal", concern: hasDebar ? `Dismissed misdemeanor (${yDebar - 2}); debarment ${yDebar}` : "None", sev: hasDebar ? "HIGH" : "LOW" },
     { g: "K — Protected Info", concern: "None", sev: "LOW" },
     { g: "L — Outside Activities", concern: "None", sev: "LOW" },
     { g: "M — IT Systems", concern: "None", sev: "LOW" },
   ];
 
   const confidence: ConfRow[] = [
-    { k: "Sanctions / debarment", status: "none", c: "0.95 no" },
-    { k: "Federal criminal", status: "none", c: "0.90 no" },
+    { k: "Sanctions / debarment", status: hasDebar ? "confirmed" : "none", c: hasDebar ? "0.91 present" : "0.95 no" },
+    { k: "Federal criminal", status: hasDebar ? "closed matter" : "none", c: hasDebar ? "0.72 dismissed" : "0.90 no" },
     { k: "Foreign influence", status: medFI ? "flagged" : "none", c: medFI ? "0.60 present" : "0.85 no" },
-    { k: "Financial derogatory", status: "none", c: "0.88 no" },
+    { k: "Financial derogatory", status: finBad ? "flagged" : "none", c: finBad ? "0.64 present" : "0.88 no" },
+    { k: "Regulatory / licensing", status: hasAdverse ? "adverse action" : "none", c: hasAdverse ? "0.83 present" : "0.92 no" },
   ];
 
   const nextActions = {
     p0: ["SF-86 §19 relative-disclosure confirmation", "Open-source employment verification", ...(medFI ? ["Foreign-relative residency + citizenship confirmation"] : [])],
-    p1: ["PACER party search", "County recorder lien index"],
+    p1: ["PACER party search", "County recorder lien index",
+      ...(hasDebar ? ["SAM.gov exclusion record pull + agency point of contact"] : []),
+      ...(hasAdverse ? ["State licensing-board order retrieval", "SEC administrative-proceeding docket"] : []),
+      ...(finBad ? ["Tradeline-level financial review (FCRA-gated, consent required)"] : [])],
     p2: ["Licensed-PI records pull", "PEP / adverse-media full screen"],
   };
 
@@ -206,10 +228,14 @@ export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => 
   return {
     isMock: slug.startsWith("demo-") || alias.isDemo,
     verdict: {
-      line: medFI
-        ? "No sanctions, debarment or LE hit; one MED adjudicator item (foreign-resident relative, reportable, not disqualifying)."
-        : "No sanctions, debarment, federal-LE or state-LE hit on the subject; no adjudicator item above LOW.",
-      tier: medFI ? "LOW-MEDIUM" : "LOW",
+      line: hasDebar
+        ? `Active federal exclusion (SAM.gov, ${yDebar}) and a dismissed criminal matter; one HIGH adjudicator item. Not clearable without agency adjudication.`
+        : hasAdverse
+          ? `No sanctions or debarment; one settled regulatory proceeding (${ySec}) and a licensing reprimand (${yBoard}) — MED adjudicator items, mitigable.`
+          : medFI
+            ? "No sanctions, debarment or LE hit; one MED adjudicator item (foreign-resident relative, reportable, not disqualifying)."
+            : "No sanctions, debarment, federal-LE or state-LE hit on the subject; no adjudicator item above LOW.",
+      tier: hasDebar ? "HIGH" : hasAdverse ? "MEDIUM" : medFI ? "LOW-MEDIUM" : "LOW",
       confidence: report?.confidence ?? 0.9,
     },
     corrections: [
@@ -227,6 +253,13 @@ export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => 
     signals,
     confidence,
     nextActions,
-    sources: ["Simulated public-records pull (mock)", "OFAC / SAM / SEC / FinCEN (checked, no hits)", "Address / property / relative graph (simulated)"],
+    sources: [
+      "Simulated public-records pull (mock)",
+      hasDebar || hasAdverse
+        ? "OFAC / SAM / SEC / FinCEN (checked — see federal checks for hits)"
+        : "OFAC / SAM / SEC / FinCEN (checked, no hits)",
+      "Address / property / relative graph (simulated)",
+      "Employment history (simulated)",
+    ],
   };
 });

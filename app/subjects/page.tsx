@@ -109,7 +109,7 @@ export default async function SubjectsPage() {
                   </p>
                   <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                     {r.id.codename}
-                    {r.latest?.date ? ` · pulled ${r.latest.date}` : " · undated"}
+                    {(r.latest?.date ?? r.pulled) ? ` · pulled ${r.latest?.date ?? r.pulled}` : " · undated"}
                     {r.id.isDemo ? " · demo" : ""}
                   </p>
                 </div>

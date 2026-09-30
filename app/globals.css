@@ -133,6 +133,7 @@
   --color-ent-person: var(--ent-person);
   --color-ent-address: var(--ent-address);
   --color-ent-phone: var(--ent-phone);
+  --color-ent-org: var(--ent-org);
   --color-p-sand: var(--p-sand);
   --color-p-sky: var(--p-sky);
   --color-p-mint: var(--p-mint);
@@ -166,6 +167,7 @@
   --ent-person: oklch(0.55 0.16 262);
   --ent-address: oklch(0.56 0.11 168);
   --ent-phone: oklch(0.62 0.13 62);
+  --ent-org: oklch(0.55 0.16 328);
 }
 
 .dark {
@@ -195,6 +197,7 @@
   --ent-person: oklch(0.68 0.14 262);
   --ent-address: oklch(0.7 0.12 168);
   --ent-phone: oklch(0.75 0.12 62);
+  --ent-org: oklch(0.72 0.14 328);
 }
 
 @layer base {
