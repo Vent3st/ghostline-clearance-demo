@@ -72,7 +72,7 @@ export default async function SubjectPage({
               <Button asChild variant="outline" size="sm">
                 <Link href={`/subjects/${identity.aliasSlug}/raw`}>
                   <Database className="size-3.5" aria-hidden />
-                  Raw ({raw.length})
+                  {raw.length > 1 ? `Raw JSON (${raw.length})` : "Raw JSON"}
                 </Link>
               </Button>
             ) : null}
