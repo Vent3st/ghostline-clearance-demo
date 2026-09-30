@@ -1,0 +1,194 @@
+{
+  "persons": [
+    {
+      "entityId": "E-JS-97B6",
+      "fullName": "Jordan Sorensen",
+      "name": {
+        "firstName": "Jordan",
+        "middleName": "",
+        "lastName": "Sorensen",
+        "suffix": ""
+      },
+      "age": 37,
+      "dob": "2/XX/1989",
+      "addresses": [
+        {
+          "addressHash": "A-SOR-HOME",
+          "fullAddress": "6355 Rainey St, Austin, TX 78745",
+          "houseNumber": "6355",
+          "street": "Rainey St",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78702",
+          "firstReportedDate": "7/1/2009",
+          "lastReportedDate": "2/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-JS-1",
+          "fullAddress": "7608 Rainey St, Austin, TX 78703",
+          "houseNumber": "7608",
+          "street": "Rainey St",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78745",
+          "firstReportedDate": "5/1/2013",
+          "lastReportedDate": "8/1/2019",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-JS-2",
+          "fullAddress": "8830 Gattis School Rd, Round Rock, TX 78664",
+          "houseNumber": "8830",
+          "street": "Gattis School Rd",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78681",
+          "firstReportedDate": "9/1/2007",
+          "lastReportedDate": "3/1/2012",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-JSQW",
+          "fullAddress": "1698 S Congress Ave, Austin, TX 78703",
+          "houseNumber": "1698",
+          "street": "S Congress Ave",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "12/1/2010",
+          "lastReportedDate": "1/1/2014",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(512) 555-0226",
+          "company": "AT&T Mobility",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-3749",
+          "company": "Bandwidth.com",
+          "phoneType": "VOIP",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-0918",
+          "company": "Verizon Wireless",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "j.sorensen@example.org",
+        "jordan34@example.net"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-CS-3A1C",
+          "firstName": "Cameron",
+          "middleName": "",
+          "lastName": "Sorensen",
+          "suffix": "",
+          "relativeType": "Child",
+          "relativeLevel": "ac",
+          "score": 254,
+          "sharedHouseholdIds": [
+            "A-SOR-HOME"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-PS-BCF8",
+          "firstName": "Parker",
+          "middleName": "",
+          "lastName": "Sorensen",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ac",
+          "score": 237,
+          "sharedHouseholdIds": [
+            "A-SOR-HOME"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-QW-057D",
+          "firstName": "Quinn",
+          "middleName": "",
+          "lastName": "Winslow",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 129,
+          "sharedHouseholdIds": [
+            "A-RM-JSQW"
+          ],
+          "city": "Round Rock",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-JS-EX",
+          "firstName": "Dmitri",
+          "middleName": "",
+          "lastName": "Sorensen",
+          "suffix": "",
+          "relativeType": "Cousin",
+          "relativeLevel": "ad",
+          "score": 87,
+          "sharedHouseholdIds": [],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Jordan",
+          "middleName": "",
+          "lastName": "Sorensen"
+        },
+        {
+          "firstName": "Jordan",
+          "middleName": "Ridge",
+          "lastName": "Sorensen"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Frankie",
+          "middleName": "",
+          "lastName": "Amara"
+        },
+        {
+          "firstName": "Elena",
+          "middleName": "",
+          "lastName": "Marlowe"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-JS-97B6",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}

@@ -1,0 +1,198 @@
+{
+  "persons": [
+    {
+      "entityId": "E-MF-D826",
+      "fullName": "Marlow Ferro",
+      "name": {
+        "firstName": "Marlow",
+        "middleName": "",
+        "lastName": "Ferro",
+        "suffix": ""
+      },
+      "age": 31,
+      "dob": "5/XX/1995",
+      "addresses": [
+        {
+          "addressHash": "A-FER-HOME",
+          "fullAddress": "2266 Granby St, Norfolk, VA 23510",
+          "houseNumber": "2266",
+          "street": "Granby St",
+          "city": "Norfolk",
+          "state": "VA",
+          "zip": "23518",
+          "firstReportedDate": "12/1/2015",
+          "lastReportedDate": "5/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-MF-1",
+          "fullAddress": "3537 Granby St, Norfolk, VA 23510",
+          "houseNumber": "3537",
+          "street": "Granby St",
+          "city": "Norfolk",
+          "state": "VA",
+          "zip": "23510",
+          "firstReportedDate": "3/1/2019",
+          "lastReportedDate": "3/1/2025",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-MF-2",
+          "fullAddress": "2736 N Glebe Rd, Arlington, VA 22203",
+          "houseNumber": "2736",
+          "street": "N Glebe Rd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "1/1/2013",
+          "lastReportedDate": "11/1/2018",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-MFSB",
+          "fullAddress": "4386 N Glebe Rd, Arlington, VA 22201",
+          "houseNumber": "4386",
+          "street": "N Glebe Rd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "4/1/2016",
+          "lastReportedDate": "1/1/2020",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(757) 555-0447",
+          "company": "Spectrum Voice",
+          "phoneType": "LandLine",
+          "isConnected": false,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(757) 555-1210",
+          "company": "Comcast Phone",
+          "phoneType": "LandLine",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "m.ferro@example.org",
+        "marlow58@example.org"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-DF-E83C",
+          "firstName": "Drew",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Child",
+          "relativeLevel": "ac",
+          "score": 219,
+          "sharedHouseholdIds": [
+            "A-FER-HOME"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-HF-2752",
+          "firstName": "Hayden",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 190,
+          "sharedHouseholdIds": [
+            "A-FER-HOME"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-JF-E252",
+          "firstName": "Jordan",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 186,
+          "sharedHouseholdIds": [
+            "A-FER-HOME"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-SB-3DF6",
+          "firstName": "Skyler",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 139,
+          "sharedHouseholdIds": [
+            "A-RM-MFSB"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-MF-EX",
+          "firstName": "Beth",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Cousin",
+          "relativeLevel": "ad",
+          "score": 93,
+          "sharedHouseholdIds": [],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Ferro"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Quinn",
+          "middleName": "",
+          "lastName": "Winslow"
+        },
+        {
+          "firstName": "Elliot",
+          "middleName": "",
+          "lastName": "Winslow"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-MF-D826",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}

@@ -1,0 +1,205 @@
+{
+  "persons": [
+    {
+      "entityId": "E-HA-5938",
+      "fullName": "Hayden Amara",
+      "name": {
+        "firstName": "Hayden",
+        "middleName": "",
+        "lastName": "Amara",
+        "suffix": ""
+      },
+      "age": 45,
+      "dob": "6/XX/1981",
+      "addresses": [
+        {
+          "addressHash": "A-AMA-HOME",
+          "fullAddress": "5289 Montana Ave, El Paso, TX 79936",
+          "houseNumber": "5289",
+          "street": "Montana Ave",
+          "city": "El Paso",
+          "state": "TX",
+          "zip": "79936",
+          "firstReportedDate": "6/1/2001",
+          "lastReportedDate": "6/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-HA-1",
+          "fullAddress": "4427 Airway Blvd, El Paso, TX 79912",
+          "houseNumber": "4427",
+          "street": "Airway Blvd",
+          "city": "El Paso",
+          "state": "TX",
+          "zip": "79912",
+          "firstReportedDate": "2/1/2005",
+          "lastReportedDate": "7/1/2011",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-HA-2",
+          "fullAddress": "4427 S Congress Ave, Austin, TX 78703",
+          "houseNumber": "4427",
+          "street": "S Congress Ave",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "11/1/1999",
+          "lastReportedDate": "6/1/2004",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-HARR",
+          "fullAddress": "4289 Montana Ave, El Paso, TX 79912",
+          "houseNumber": "4289",
+          "street": "Montana Ave",
+          "city": "El Paso",
+          "state": "TX",
+          "zip": "79912",
+          "firstReportedDate": "9/1/2002",
+          "lastReportedDate": "9/1/2006",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(915) 555-0108",
+          "company": "Bandwidth.com",
+          "phoneType": "VOIP",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(915) 555-8885",
+          "company": "Verizon Wireless",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-0646",
+          "company": "AT&T Mobility",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "h.amara@example.net",
+        "hayden57@example.org"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-FA-DF64",
+          "firstName": "Frankie",
+          "middleName": "",
+          "lastName": "Amara",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 205,
+          "sharedHouseholdIds": [
+            "A-AMA-HOME"
+          ],
+          "city": "El Paso",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-KA-954E",
+          "firstName": "Kit",
+          "middleName": "",
+          "lastName": "Amara",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ac",
+          "score": 230,
+          "sharedHouseholdIds": [
+            "A-AMA-HOME"
+          ],
+          "city": "El Paso",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-MA-A622",
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Amara",
+          "suffix": "",
+          "relativeType": "Child",
+          "relativeLevel": "ac",
+          "score": 183,
+          "sharedHouseholdIds": [
+            "A-AMA-HOME"
+          ],
+          "city": "El Paso",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-RR-E335",
+          "firstName": "Riley",
+          "middleName": "",
+          "lastName": "Rivas",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 162,
+          "sharedHouseholdIds": [
+            "A-RM-HARR"
+          ],
+          "city": "El Paso",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-HA-EX",
+          "firstName": "Nadia",
+          "middleName": "",
+          "lastName": "Amara",
+          "suffix": "",
+          "relativeType": "In-Law",
+          "relativeLevel": "ad",
+          "score": 128,
+          "sharedHouseholdIds": [],
+          "city": "El Paso",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Hayden",
+          "middleName": "",
+          "lastName": "Amara"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Wren",
+          "middleName": "",
+          "lastName": "Sabin"
+        },
+        {
+          "firstName": "Avery",
+          "middleName": "",
+          "lastName": "Okafor"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-HA-5938",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}

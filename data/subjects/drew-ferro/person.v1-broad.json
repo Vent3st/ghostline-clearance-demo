@@ -1,0 +1,204 @@
+{
+  "persons": [
+    {
+      "entityId": "E-DF-E83C",
+      "fullName": "Drew Ferro",
+      "name": {
+        "firstName": "Drew",
+        "middleName": "",
+        "lastName": "Ferro",
+        "suffix": ""
+      },
+      "age": 52,
+      "dob": "10/XX/1974",
+      "addresses": [
+        {
+          "addressHash": "A-FER-HOME",
+          "fullAddress": "2804 Hampton Blvd, Norfolk, VA 23510",
+          "houseNumber": "2804",
+          "street": "Hampton Blvd",
+          "city": "Norfolk",
+          "state": "VA",
+          "zip": "23510",
+          "firstReportedDate": "3/1/1994",
+          "lastReportedDate": "4/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-DF-1",
+          "fullAddress": "8160 Granby St, Norfolk, VA 23510",
+          "houseNumber": "8160",
+          "street": "Granby St",
+          "city": "Norfolk",
+          "state": "VA",
+          "zip": "23510",
+          "firstReportedDate": "3/1/1998",
+          "lastReportedDate": "9/1/2004",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-DF-2",
+          "fullAddress": "1517 Clarendon Blvd, Arlington, VA 22201",
+          "houseNumber": "1517",
+          "street": "Clarendon Blvd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "4/1/1992",
+          "lastReportedDate": "2/1/1997",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-DFLD",
+          "fullAddress": "1970 Colley Ave, Norfolk, VA 23518",
+          "houseNumber": "1970",
+          "street": "Colley Ave",
+          "city": "Norfolk",
+          "state": "VA",
+          "zip": "23510",
+          "firstReportedDate": "7/1/1995",
+          "lastReportedDate": "7/1/1999",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(757) 555-0976",
+          "company": "Verizon Wireless",
+          "phoneType": "Wireless",
+          "isConnected": false,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(757) 555-1210",
+          "company": "T-Mobile USA",
+          "phoneType": "Wireless",
+          "isConnected": false,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "d.ferro@example.com",
+        "drew11@example.com",
+        "ridge.ferro@example.net"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-HF-2752",
+          "firstName": "Hayden",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 195,
+          "sharedHouseholdIds": [
+            "A-FER-HOME"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-JF-E252",
+          "firstName": "Jordan",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 231,
+          "sharedHouseholdIds": [
+            "A-FER-HOME"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-MF-D826",
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ac",
+          "score": 250,
+          "sharedHouseholdIds": [
+            "A-FER-HOME"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-LD-45E3",
+          "firstName": "Lane",
+          "middleName": "",
+          "lastName": "Delacroix",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 169,
+          "sharedHouseholdIds": [
+            "A-RM-DFLD"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-DF-EX",
+          "firstName": "Beth",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Cousin",
+          "relativeLevel": "ad",
+          "score": 86,
+          "sharedHouseholdIds": [],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Drew",
+          "middleName": "",
+          "lastName": "Ferro"
+        },
+        {
+          "firstName": "Drew",
+          "middleName": "Ridge",
+          "lastName": "Ferro"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Holloway"
+        },
+        {
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Amara"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-DF-E83C",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}

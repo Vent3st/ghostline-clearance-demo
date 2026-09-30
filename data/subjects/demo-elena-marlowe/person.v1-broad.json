@@ -1,7 +1,7 @@
 {
   "persons": [
     {
-      "entityId": "E-DEMO-ELENA",
+      "entityId": "E-EM-4A2",
       "fullName": "Elena Marlowe",
       "name": {
         "firstName": "Elena",
@@ -9,74 +9,117 @@
         "lastName": "Marlowe",
         "suffix": ""
       },
-      "age": 37,
-      "dob": "8/XX/1989",
+      "age": 45,
+      "dob": "3/XX/1981",
       "addresses": [
         {
-          "addressHash": "A-EM-1",
-          "fullAddress": "55 Rainey St, Austin, TX 78703",
-          "houseNumber": "55",
+          "addressHash": "A-MAR-HOME",
+          "fullAddress": "7263 Barton Springs Rd, Austin, TX 78702",
+          "houseNumber": "7263",
+          "street": "Barton Springs Rd",
           "city": "Austin",
           "state": "TX",
-          "zip": "78703",
-          "firstReportedDate": "6/1/2019",
-          "lastReportedDate": "8/1/2025",
+          "zip": "78745",
+          "firstReportedDate": "12/1/2001",
+          "lastReportedDate": "3/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-EM-1",
+          "fullAddress": "5978 S Congress Ave, Austin, TX 78745",
+          "houseNumber": "5978",
+          "street": "S Congress Ave",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78745",
+          "firstReportedDate": "9/1/2005",
+          "lastReportedDate": "12/1/2011",
           "isDeliverable": true,
           "isPublic": true
         },
         {
           "addressHash": "A-EM-2",
-          "fullAddress": "410 Brushy Creek Rd, Round Rock, TX 78664",
-          "houseNumber": "410",
+          "fullAddress": "3841 Mays St, Round Rock, TX 78681",
+          "houseNumber": "3841",
+          "street": "Mays St",
           "city": "Round Rock",
           "state": "TX",
           "zip": "78664",
-          "firstReportedDate": "2/1/2013",
-          "lastReportedDate": "5/1/2019",
+          "firstReportedDate": "6/1/1999",
+          "lastReportedDate": "11/1/2004",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-EMEW",
+          "fullAddress": "6817 Sunrise Rd, Round Rock, TX 78681",
+          "houseNumber": "6817",
+          "street": "Sunrise Rd",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78681",
+          "firstReportedDate": "9/1/2002",
+          "lastReportedDate": "2/1/2006",
           "isDeliverable": true,
           "isPublic": true
         }
       ],
       "phoneNumbers": [
         {
-          "phoneNumber": "(512) 555-0102",
+          "phoneNumber": "(512) 555-0355",
           "company": "Google Fi",
           "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-7996",
+          "company": "Google Fi",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-0449",
+          "company": "Spectrum Voice",
+          "phoneType": "LandLine",
           "isConnected": true,
           "isPublic": true
         }
       ],
       "emailAddresses": [
         "e.marlowe@example.com",
-        "e.marlowe@example.com"
+        "elena19@example.org",
+        "lark.marlowe@example.com"
       ],
       "relativesSummary": [
         {
-          "entityId": "E-NEAL-BRACKETT",
-          "firstName": "Neal",
+          "entityId": "E-EW-BE0F",
+          "firstName": "Elliot",
           "middleName": "",
-          "lastName": "Brackett",
+          "lastName": "Winslow",
           "suffix": "",
           "relativeType": "Associate",
           "relativeLevel": "ab",
-          "score": 150,
-          "sharedHouseholdIds": [],
-          "city": "Austin",
+          "score": 133,
+          "sharedHouseholdIds": [
+            "A-RM-EMEW"
+          ],
+          "city": "Round Rock",
           "state": "TX",
           "isDeceased": false
         },
         {
-          "entityId": "R-EM-SP",
-          "firstName": "Peter",
+          "entityId": "R-EM-EX",
+          "firstName": "Leo",
           "middleName": "",
           "lastName": "Marlowe",
           "suffix": "",
-          "relativeType": "Spouse",
-          "relativeLevel": "ab",
-          "score": 475,
-          "sharedHouseholdIds": [
-            "HH-EM"
-          ],
+          "relativeType": "Aunt/Uncle",
+          "relativeLevel": "ad",
+          "score": 120,
+          "sharedHouseholdIds": [],
           "city": "Austin",
           "state": "TX",
           "isDeceased": false
@@ -89,16 +132,27 @@
           "lastName": "Marlowe"
         }
       ],
-      "associatesSummary": [],
+      "associatesSummary": [
+        {
+          "firstName": "Hayden",
+          "middleName": "",
+          "lastName": "Ferro"
+        },
+        {
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Amara"
+        }
+      ],
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false
     }
   ],
-  "requestId": "DEMO-E-DEMO-ELENA",
+  "requestId": "DEMO-E-EM-4A2",
   "requestType": "Person",
-  "requestTime": "2026-09-29T15:16:53.345458",
+  "requestTime": "2026-09-29T00:00:00.000000",
   "isError": false,
   "_mock": true,
-  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
 }

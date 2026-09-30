@@ -1,0 +1,187 @@
+{
+  "persons": [
+    {
+      "entityId": "E-DB-76CA",
+      "fullName": "Devon Brandt",
+      "name": {
+        "firstName": "Devon",
+        "middleName": "",
+        "lastName": "Brandt",
+        "suffix": ""
+      },
+      "age": 48,
+      "dob": "7/XX/1978",
+      "addresses": [
+        {
+          "addressHash": "A-BRA-HOME",
+          "fullAddress": "1791 Clarendon Blvd, Arlington, VA 22201",
+          "houseNumber": "1791",
+          "street": "Clarendon Blvd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "3/1/1998",
+          "lastReportedDate": "6/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-DB-1",
+          "fullAddress": "5010 Wilson Blvd, Arlington, VA 22203",
+          "houseNumber": "5010",
+          "street": "Wilson Blvd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22201",
+          "firstReportedDate": "6/1/2002",
+          "lastReportedDate": "11/1/2008",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-DB-2",
+          "fullAddress": "2017 Wisconsin Ave, Bethesda, MD 20814",
+          "houseNumber": "2017",
+          "street": "Wisconsin Ave",
+          "city": "Bethesda",
+          "state": "MD",
+          "zip": "20814",
+          "firstReportedDate": "11/1/1996",
+          "lastReportedDate": "1/1/2001",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-DBJC",
+          "fullAddress": "5643 Clarendon Blvd, Arlington, VA 22201",
+          "houseNumber": "5643",
+          "street": "Clarendon Blvd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "2/1/1999",
+          "lastReportedDate": "3/1/2003",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(703) 555-0951",
+          "company": "T-Mobile USA",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(703) 555-4655",
+          "company": "Comcast Phone",
+          "phoneType": "LandLine",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "d.brandt@example.org",
+        "devon81@example.net"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-RB-8304",
+          "firstName": "Reese",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 240,
+          "sharedHouseholdIds": [
+            "A-BRA-HOME"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-SB-3DF6",
+          "firstName": "Skyler",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ac",
+          "score": 236,
+          "sharedHouseholdIds": [
+            "A-BRA-HOME"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-JC-973F",
+          "firstName": "Jordan",
+          "middleName": "",
+          "lastName": "Calloway",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 130,
+          "sharedHouseholdIds": [
+            "A-RM-DBJC"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-DB-EX",
+          "firstName": "Beth",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "In-Law",
+          "relativeLevel": "ad",
+          "score": 82,
+          "sharedHouseholdIds": [],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Devon",
+          "middleName": "",
+          "lastName": "Brandt"
+        },
+        {
+          "firstName": "Devon",
+          "middleName": "Mesa",
+          "lastName": "Brandt"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Quinn",
+          "middleName": "",
+          "lastName": "Winslow"
+        },
+        {
+          "firstName": "Drew",
+          "middleName": "",
+          "lastName": "Ferro"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-DB-76CA",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}

@@ -1,0 +1,183 @@
+{
+  "persons": [
+    {
+      "entityId": "E-SB-3DF6",
+      "fullName": "Skyler Brandt",
+      "name": {
+        "firstName": "Skyler",
+        "middleName": "",
+        "lastName": "Brandt",
+        "suffix": ""
+      },
+      "age": 30,
+      "dob": "11/XX/1996",
+      "addresses": [
+        {
+          "addressHash": "A-BRA-HOME",
+          "fullAddress": "5995 Clarendon Blvd, Arlington, VA 22203",
+          "houseNumber": "5995",
+          "street": "Clarendon Blvd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22203",
+          "firstReportedDate": "8/1/2016",
+          "lastReportedDate": "4/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-SB-1",
+          "fullAddress": "7316 Wilson Blvd, Arlington, VA 22201",
+          "houseNumber": "7316",
+          "street": "Wilson Blvd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22201",
+          "firstReportedDate": "9/1/2020",
+          "lastReportedDate": "5/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-SB-2",
+          "fullAddress": "4884 Wisconsin Ave, Bethesda, MD 20817",
+          "houseNumber": "4884",
+          "street": "Wisconsin Ave",
+          "city": "Bethesda",
+          "state": "MD",
+          "zip": "20814",
+          "firstReportedDate": "9/1/2014",
+          "lastReportedDate": "8/1/2019",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-MFSB",
+          "fullAddress": "445 N Glebe Rd, Arlington, VA 22203",
+          "houseNumber": "445",
+          "street": "N Glebe Rd",
+          "city": "Arlington",
+          "state": "VA",
+          "zip": "22201",
+          "firstReportedDate": "11/1/2017",
+          "lastReportedDate": "9/1/2021",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(703) 555-0868",
+          "company": "Bandwidth.com",
+          "phoneType": "VOIP",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(703) 555-4655",
+          "company": "Verizon Wireless",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "s.brandt@example.org",
+        "skyler64@example.com",
+        "halcyon.brandt@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-DB-76CA",
+          "firstName": "Devon",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "Child",
+          "relativeLevel": "ac",
+          "score": 215,
+          "sharedHouseholdIds": [
+            "A-BRA-HOME"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-RB-8304",
+          "firstName": "Reese",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 204,
+          "sharedHouseholdIds": [
+            "A-BRA-HOME"
+          ],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-MF-D826",
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Ferro",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 154,
+          "sharedHouseholdIds": [
+            "A-RM-MFSB"
+          ],
+          "city": "Norfolk",
+          "state": "VA",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-SB-EX",
+          "firstName": "Beth",
+          "middleName": "",
+          "lastName": "Brandt",
+          "suffix": "",
+          "relativeType": "In-Law",
+          "relativeLevel": "ad",
+          "score": 96,
+          "sharedHouseholdIds": [],
+          "city": "Arlington",
+          "state": "VA",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Skyler",
+          "middleName": "",
+          "lastName": "Brandt"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Trevor",
+          "middleName": "",
+          "lastName": "Osborne"
+        },
+        {
+          "firstName": "Lane",
+          "middleName": "",
+          "lastName": "Nakamura"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-SB-3DF6",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}
