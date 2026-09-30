@@ -9,7 +9,7 @@ import { applyRedactions, buildRedactor } from "@/lib/redact";
 import { buildReportModel } from "@/lib/report";
 import { buildDeepModel } from "@/lib/deep-report";
 import { Button } from "@/components/ui/button";
-import { ClearanceReport } from "@/components/clearance-report";
+import { ClearanceReport, SourcesSection } from "@/components/clearance-report";
 import { PremiumDossier } from "./premium-dossier";
 import "@/app/site/site.css";
 
@@ -114,6 +114,8 @@ export default async function SubjectPage({
             <PremiumDossier deep={deepModel} />
           </div>
         ) : null}
+
+        {report ? <SourcesSection model={report} /> : null}
       </div>
     </div>
   );

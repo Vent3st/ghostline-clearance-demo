@@ -53,8 +53,8 @@ const NodeGlyph = memo(function NodeGlyph({
     >
       {node.kind === "org" ? (
         <rect
-          x={-r * 0.85}
-          y={-r * 0.85}
+          x={node.x - r * 0.85}
+          y={node.y - r * 0.85}
           width={r * 1.7}
           height={r * 1.7}
           rx={2}
@@ -159,15 +159,26 @@ export function GraphCanvas({
   const worldRef = useRef<SVGGElement | null>(null);
   const zoomLabelRef = useRef<HTMLSpanElement | null>(null);
   const view = useRef({ k: 1, tx: 0, ty: 0 });
-  const drag = useRef<{ x: number; y: number; scale: number } | null>(null);
+  const drag = useRef<{ x: number; y: number; x0: number; y0: number; scale: number; panning: boolean } | null>(null);
+  const raf = useRef<number | null>(null);
 
   const MIN_K = 0.4;
   const MAX_K = 8;
 
+  // Coalesced to one write per animation frame: a trackpad emits wheel events far
+  // faster than the screen refreshes, and panning fires per pointermove.
   const apply = useCallback(() => {
-    const { k, tx, ty } = view.current;
-    worldRef.current?.setAttribute("transform", `translate(${tx} ${ty}) scale(${k})`);
-    if (zoomLabelRef.current) zoomLabelRef.current.textContent = `${Math.round(k * 100)}%`;
+    if (raf.current !== null) return;
+    raf.current = requestAnimationFrame(() => {
+      raf.current = null;
+      const { k, tx, ty } = view.current;
+      worldRef.current?.setAttribute("transform", `translate(${tx} ${ty}) scale(${k})`);
+      if (zoomLabelRef.current) zoomLabelRef.current.textContent = `${Math.round(k * 100)}%`;
+    });
+  }, []);
+
+  useEffect(() => () => {
+    if (raf.current !== null) cancelAnimationFrame(raf.current);
   }, []);
 
   // Wheel zoom about the pointer. Registered manually because React's onWheel is
@@ -181,7 +192,10 @@ export function GraphCanvas({
       if (!ctm) return;
       const pt = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(ctm.inverse());
       const { k, tx, ty } = view.current;
-      const next = Math.min(MAX_K, Math.max(MIN_K, k * (ev.deltaY < 0 ? 1.12 : 1 / 1.12)));
+      // Exponential in the wheel delta: continuous under a trackpad, and a pinch
+      // (ctrl+wheel on macOS) scales by the same curve instead of jumping.
+      const step = ev.deltaMode === 1 ? ev.deltaY * 16 : ev.deltaY;
+      const next = Math.min(MAX_K, Math.max(MIN_K, k * Math.exp(-step * 0.0016)));
       if (next === k) return;
       // Keep the point under the cursor fixed: world = (vb - t) / k.
       view.current = {
@@ -195,20 +209,37 @@ export function GraphCanvas({
     return () => svg.removeEventListener("wheel", onWheel);
   }, [apply]);
 
+  /**
+   * Pan starts only once the pointer has actually moved. Capturing on pointerdown
+   * redirected the whole gesture to the <svg>, so the click never reached a node
+   * glyph and selection stopped working — the side panel stayed on "nothing
+   * selected". A 3px threshold keeps click-to-select and drag-to-pan separate.
+   */
   const onPointerDown = useCallback((ev: React.PointerEvent<SVGSVGElement>) => {
     if (ev.button !== 0) return;
     const ctm = svgRef.current?.getScreenCTM();
-    drag.current = { x: ev.clientX, y: ev.clientY, scale: ctm ? ctm.a : 1 };
-    ev.currentTarget.setPointerCapture(ev.pointerId);
+    drag.current = {
+      x: ev.clientX,
+      y: ev.clientY,
+      x0: ev.clientX,
+      y0: ev.clientY,
+      scale: ctm ? ctm.a : 1,
+      panning: false,
+    };
   }, []);
 
   const onPointerMove = useCallback(
     (ev: React.PointerEvent<SVGSVGElement>) => {
       const d = drag.current;
       if (!d) return;
-      const s = d.scale || 1;
-      view.current.tx += (ev.clientX - d.x) / s;
-      view.current.ty += (ev.clientY - d.y) / s;
+      if (!d.panning) {
+        if (Math.hypot(ev.clientX - d.x0, ev.clientY - d.y0) < 3) return;
+        d.panning = true;
+        ev.currentTarget.setPointerCapture(ev.pointerId);
+      }
+      const sc = d.scale || 1;
+      view.current.tx += (ev.clientX - d.x) / sc;
+      view.current.ty += (ev.clientY - d.y) / sc;
       d.x = ev.clientX;
       d.y = ev.clientY;
       apply();
@@ -216,7 +247,11 @@ export function GraphCanvas({
     [apply],
   );
 
-  const endDrag = useCallback(() => {
+  const endDrag = useCallback((ev: React.PointerEvent<SVGSVGElement>) => {
+    const d = drag.current;
+    if (d?.panning && ev.currentTarget.hasPointerCapture(ev.pointerId)) {
+      ev.currentTarget.releasePointerCapture(ev.pointerId);
+    }
     drag.current = null;
   }, []);
 
@@ -289,7 +324,7 @@ export function GraphCanvas({
         <svg
           ref={svgRef}
           viewBox={viewBox}
-          className="size-full touch-none [cursor:grab] active:[cursor:grabbing]"
+          className="size-full touch-none"
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
