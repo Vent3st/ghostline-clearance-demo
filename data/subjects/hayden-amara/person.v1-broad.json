@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 45,
-      "dob": "11/XX/1981",
+      "dob": "8/XX/1981",
       "addresses": [
         {
           "addressHash": "A-AMA-HOME",
@@ -221,6 +221,99 @@
         }
       ],
       "occupation": "Systems Engineer",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "hamara",
+          "url": "linkedin.com/in/hamara",
+          "followers": 647,
+          "isVerified": false,
+          "lastActive": "9/2024",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Google Scholar",
+          "kind": "professional",
+          "handle": "hayden30",
+          "url": "scholar.google.com/citations?user=hayden30",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "6/2025",
+          "visibility": "public"
+        },
+        {
+          "platform": "ResearchGate",
+          "kind": "professional",
+          "handle": "hharbor",
+          "url": "researchgate.net/profile/hharbor",
+          "followers": 1565,
+          "isVerified": false,
+          "lastActive": "2/2026",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Behance",
+          "kind": "professional",
+          "handle": "amara62",
+          "url": "behance.net/amara62",
+          "followers": 608,
+          "isVerified": false,
+          "lastActive": "2/2025",
+          "visibility": "public"
+        },
+        {
+          "platform": "TikTok",
+          "kind": "casual",
+          "handle": "hayden.amara",
+          "url": "tiktok.com/@hayden.amara",
+          "followers": 46627,
+          "isVerified": false,
+          "lastActive": "8/2022",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Facebook",
+          "kind": "casual",
+          "handle": "hharbor",
+          "url": "facebook.com/hharbor",
+          "followers": 1818,
+          "isVerified": false,
+          "lastActive": "11/2023",
+          "visibility": "public"
+        },
+        {
+          "platform": "Strava",
+          "kind": "casual",
+          "handle": "hamara",
+          "url": "strava.com/athletes/hamara",
+          "followers": 81300,
+          "isVerified": false,
+          "lastActive": "12/2022",
+          "visibility": "public"
+        },
+        {
+          "platform": "Pinterest",
+          "kind": "casual",
+          "handle": "harboramara",
+          "url": "pinterest.com/harboramara",
+          "followers": 1435,
+          "isVerified": false,
+          "lastActive": "8/2019",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Twitch",
+          "kind": "casual",
+          "handle": "amara62",
+          "url": "twitch.tv/amara62",
+          "followers": 1668,
+          "isVerified": false,
+          "lastActive": "7/2024",
+          "visibility": "public"
+        }
+      ],
+      "socialFootprint": "very broad",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

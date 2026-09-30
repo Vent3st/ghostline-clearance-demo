@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 45,
-      "dob": "1/XX/1981",
+      "dob": "11/XX/1981",
       "addresses": [
         {
           "addressHash": "A-MAR-HOME",
@@ -174,6 +174,89 @@
         }
       ],
       "occupation": "Portfolio Adviser",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "emarlowe",
+          "url": "linkedin.com/in/emarlowe",
+          "followers": 607,
+          "isVerified": false,
+          "lastActive": "9/2026",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Speaker profile",
+          "kind": "professional",
+          "handle": "elena5",
+          "url": "sessionize.com/elena5",
+          "followers": 349,
+          "isVerified": false,
+          "lastActive": "2/2026",
+          "visibility": "public"
+        },
+        {
+          "platform": "GitHub",
+          "kind": "professional",
+          "handle": "elark",
+          "url": "github.com/elark",
+          "followers": 361,
+          "isVerified": false,
+          "lastActive": "8/2026",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "X",
+          "kind": "casual",
+          "handle": "elena.marlowe",
+          "url": "x.com/elena.marlowe",
+          "followers": 33923,
+          "isVerified": false,
+          "lastActive": "2/2026",
+          "visibility": "public"
+        },
+        {
+          "platform": "Instagram",
+          "kind": "casual",
+          "handle": "elark",
+          "url": "instagram.com/elark",
+          "followers": 687,
+          "isVerified": false,
+          "lastActive": "3/2020",
+          "visibility": "public"
+        },
+        {
+          "platform": "Reddit",
+          "kind": "casual",
+          "handle": "emarlowe",
+          "url": "reddit.com/user/emarlowe",
+          "followers": 431,
+          "isVerified": false,
+          "lastActive": "6/2023",
+          "visibility": "public"
+        },
+        {
+          "platform": "TikTok",
+          "kind": "casual",
+          "handle": "larkmarlowe",
+          "url": "tiktok.com/@larkmarlowe",
+          "followers": 75432,
+          "isVerified": false,
+          "lastActive": "1/2021",
+          "visibility": "public"
+        },
+        {
+          "platform": "Facebook",
+          "kind": "casual",
+          "handle": "marlowe52",
+          "url": "facebook.com/marlowe52",
+          "followers": 111262,
+          "isVerified": false,
+          "lastActive": "7/2024",
+          "visibility": "restricted"
+        }
+      ],
+      "socialFootprint": "very broad",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

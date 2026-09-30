@@ -25,6 +25,10 @@ interface RawAddr {
   firstReportedDate?: string; lastReportedDate?: string;
 }
 interface RawPhone { phoneNumber?: string; company?: string; phoneType?: string }
+interface RawSocial {
+  platform?: string; kind?: string; handle?: string; url?: string;
+  followers?: number | null; isVerified?: boolean; lastActive?: string; visibility?: string;
+}
 interface RawEmployer {
   company?: string; title?: string; city?: string; state?: string;
   fromDate?: string; toDate?: string; isCurrent?: boolean;
@@ -35,6 +39,7 @@ interface RawPerson {
   addresses?: RawAddr[]; phoneNumbers?: RawPhone[]; emailAddresses?: unknown[];
   relativesSummary?: RawRel[]; akas?: RawName[];
   employers?: RawEmployer[]; occupation?: string;
+  socialProfiles?: RawSocial[]; socialFootprint?: string;
 }
 
 export interface ReportNode { id: string; label: string; kind: "person" | "address" | "phone" | "org"; x: number; y: number; pred?: boolean }
@@ -66,6 +71,21 @@ export interface ReportModel {
     entityTail: string | null;
     tenureSince: string | null;
   };
+  /**
+   * Public account surface, split by kind. Professional profiles corroborate the
+   * employment record; casual ones are where public signal leaks. Footprint size
+   * varies widely across the roster by design.
+   */
+  social: {
+    platform: string;
+    kind: "professional" | "casual";
+    handle: string;
+    followers: number | null;
+    verified: boolean;
+    lastActive: string | null;
+    visibility: string | null;
+  }[];
+  socialFootprint: string | null;
   /** Employment history — company, role and tenure, newest first. */
   employment: { company: string; title: string | null; location: string | null; from: string | null; to: string | null; current: boolean }[];
   occupation: string | null;
@@ -342,6 +362,18 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
     relResolved[0]?.location ?? addresses[0]?.city ?? null,
   );
 
+  const social = (p.socialProfiles ?? [])
+    .filter((x) => x.platform && x.handle)
+    .map((x) => ({
+      platform: x.platform!,
+      kind: x.kind === "professional" ? ("professional" as const) : ("casual" as const),
+      handle: x.handle!,
+      followers: typeof x.followers === "number" ? x.followers : null,
+      verified: Boolean(x.isVerified),
+      lastActive: x.lastActive ?? null,
+      visibility: x.visibility ?? null,
+    }));
+
   const employment = (p.employers ?? [])
     .filter((e) => e.company)
     .map((e) => ({
@@ -375,6 +407,8 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
     surface,
     employment,
     occupation: p.occupation ?? null,
+    social,
+    socialFootprint: p.socialFootprint ?? null,
     recordsByCategory,
     activityByYear,
     graph: { nodes, edges },
@@ -386,6 +420,7 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
       { name: "Phone / contact", count: phones.length, conf: "0.86" },
       { name: "Relative / associate graph", count: relResolved.length, conf: "0.88" },
       { name: "Employment history", count: employment.length, conf: "0.81" },
+      { name: "Public account surface", count: social.length, conf: "0.74" },
       {
         name: "Sanctions / LE screen",
         count: adj.screenHits === 0 ? "0 hits" : `${adj.screenHits} hits`,
