@@ -172,6 +172,69 @@
         }
       ],
       "occupation": "Records Analyst",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "wsabin",
+          "url": "linkedin.com/in/wsabin",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "7/2026",
+          "visibility": "public"
+        },
+        {
+          "platform": "Google Scholar",
+          "kind": "professional",
+          "handle": "wren99",
+          "url": "scholar.google.com/citations?user=wren99",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "8/2024",
+          "visibility": "public"
+        },
+        {
+          "platform": "ResearchGate",
+          "kind": "professional",
+          "handle": "wharbor",
+          "url": "researchgate.net/profile/wharbor",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "1/2025",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Strava",
+          "kind": "casual",
+          "handle": "wren.sabin",
+          "url": "strava.com/athletes/wren.sabin",
+          "followers": 41985,
+          "isVerified": false,
+          "lastActive": "6/2025",
+          "visibility": "public"
+        },
+        {
+          "platform": "Pinterest",
+          "kind": "casual",
+          "handle": "wharbor",
+          "url": "pinterest.com/wharbor",
+          "followers": 114,
+          "isVerified": false,
+          "lastActive": "5/2026",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Twitch",
+          "kind": "casual",
+          "handle": "wsabin",
+          "url": "twitch.tv/wsabin",
+          "followers": 3412,
+          "isVerified": false,
+          "lastActive": "7/2021",
+          "visibility": "public"
+        }
+      ],
+      "socialFootprint": "broad",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

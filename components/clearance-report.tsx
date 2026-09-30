@@ -27,6 +27,15 @@ const ADJ_COLOR: Record<string, string> = {
 };
 
 /** Critical-adjacency proximity map — subject/home at center, sites placed by distance. */
+/** 1_200 -> "1.2k", 48_000 -> "48k" — reach is an order-of-magnitude claim, not a count. */
+function fmtReach(n: number): string {
+  if (n >= 1000) {
+    const k = n / 1000;
+    return `${k >= 10 ? Math.round(k) : Math.round(k * 10) / 10}k`;
+  }
+  return String(n);
+}
+
 export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; graphHref?: string }) {
   const C = 2 * Math.PI * 42; // gauge circumference
   const offset = C * (1 - m.confidence);
@@ -235,6 +244,63 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+      ) : null}
+
+      {m.social.length > 0 ? (
+        <section id="social">
+          <div className="wrap">
+            <div className="sec-head">
+              <span className="eyebrow">Public account surface · professional &amp; casual</span>
+              <h2>Where the subject is publicly visible.</h2>
+              <p>
+                {m.socialFootprint ? `${m.socialFootprint} footprint — ` : ""}
+                {m.social.filter((x) => x.kind === "professional").length} professional ·{" "}
+                {m.social.filter((x) => x.kind === "casual").length} casual
+                {(() => {
+                  const reach = m.social.reduce((a, x) => a + (x.followers ?? 0), 0);
+                  return reach > 0 ? ` · ${fmtReach(reach)} combined reach.` : ".";
+                })()}{" "}
+                Accounts are attributed by handle and corroborating detail, not confirmed by the
+                platform.
+              </p>
+            </div>
+            <div className="two">
+              {(["professional", "casual"] as const).map((kind) => {
+                const rows = m.social.filter((x) => x.kind === kind);
+                if (rows.length === 0) return null;
+                return (
+                  <div className="card pad" key={kind}>
+                    <p className="chart-title">
+                      {kind === "professional" ? "Professional" : "Casual"} · {rows.length}
+                    </p>
+                    <div className="srclist">
+                      {rows.map((x, i) => (
+                        <div className="sr" key={i}>
+                          <span className="n">
+                            <b>{x.platform}</b>{" "}
+                            <span style={{ fontFamily: "var(--mono)" }}>@{x.handle}</span>
+                            {x.verified ? (
+                              <span style={{ color: "var(--good)", marginLeft: 6 }}>· verified</span>
+                            ) : null}
+                          </span>
+                          <span className="m">
+                            {x.followers != null ? `${fmtReach(x.followers)} followers · ` : ""}
+                            {x.visibility ?? "unknown"}
+                            {x.lastActive ? ` · last seen ${x.lastActive}` : ""}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <p style={{ margin: "8px 2px 0", fontSize: 11, color: "var(--muted)" }}>
+              Handles only — no platform API was queried and no private content is represented.
+              Fictional sample data.
+            </p>
           </div>
         </section>
       ) : null}

@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 37,
-      "dob": "4/XX/1989",
+      "dob": "8/XX/1989",
       "addresses": [
         {
           "addressHash": "A-SOR-HOME",
@@ -210,6 +210,49 @@
         }
       ],
       "occupation": "Portfolio Adviser",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "jsorensen",
+          "url": "linkedin.com/in/jsorensen",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "7/2026",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Speaker profile",
+          "kind": "professional",
+          "handle": "jordan27",
+          "url": "sessionize.com/jordan27",
+          "followers": 1643,
+          "isVerified": false,
+          "lastActive": "12/2025",
+          "visibility": "public"
+        },
+        {
+          "platform": "Twitch",
+          "kind": "casual",
+          "handle": "jordan.sorensen",
+          "url": "twitch.tv/jordan.sorensen",
+          "followers": 451,
+          "isVerified": false,
+          "lastActive": "6/2025",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "YouTube",
+          "kind": "casual",
+          "handle": "jridge",
+          "url": "youtube.com/@jridge",
+          "followers": 2038,
+          "isVerified": false,
+          "lastActive": "5/2019",
+          "visibility": "private"
+        }
+      ],
+      "socialFootprint": "moderate",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

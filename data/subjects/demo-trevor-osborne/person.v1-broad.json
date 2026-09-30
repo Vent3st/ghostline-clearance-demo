@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 48,
-      "dob": "7/XX/1978",
+      "dob": "3/XX/1978",
       "addresses": [
         {
           "addressHash": "A-OSB-HOME",
@@ -166,6 +166,89 @@
         }
       ],
       "occupation": "Commercial Agent",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "tosborne",
+          "url": "linkedin.com/in/tosborne",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "9/2024",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Google Scholar",
+          "kind": "professional",
+          "handle": "trevor56",
+          "url": "scholar.google.com/citations?user=trevor56",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "1/2026",
+          "visibility": "public"
+        },
+        {
+          "platform": "ResearchGate",
+          "kind": "professional",
+          "handle": "tozzy",
+          "url": "researchgate.net/profile/tozzy",
+          "followers": null,
+          "isVerified": false,
+          "lastActive": "10/2025",
+          "visibility": "public"
+        },
+        {
+          "platform": "Pinterest",
+          "kind": "casual",
+          "handle": "trevor.osborne",
+          "url": "pinterest.com/trevor.osborne",
+          "followers": 163,
+          "isVerified": false,
+          "lastActive": "2/2019",
+          "visibility": "public"
+        },
+        {
+          "platform": "Twitch",
+          "kind": "casual",
+          "handle": "tozzy",
+          "url": "twitch.tv/tozzy",
+          "followers": 2732,
+          "isVerified": false,
+          "lastActive": "5/2019",
+          "visibility": "private"
+        },
+        {
+          "platform": "YouTube",
+          "kind": "casual",
+          "handle": "tosborne",
+          "url": "youtube.com/@tosborne",
+          "followers": 77941,
+          "isVerified": false,
+          "lastActive": "5/2023",
+          "visibility": "public"
+        },
+        {
+          "platform": "Mastodon",
+          "kind": "casual",
+          "handle": "ozzyosborne",
+          "url": "mastodon.social/@ozzyosborne",
+          "followers": 80836,
+          "isVerified": false,
+          "lastActive": "3/2020",
+          "visibility": "public"
+        },
+        {
+          "platform": "Letterboxd",
+          "kind": "casual",
+          "handle": "osborne91",
+          "url": "letterboxd.com/osborne91",
+          "followers": 3461,
+          "isVerified": false,
+          "lastActive": "4/2025",
+          "visibility": "public"
+        }
+      ],
+      "socialFootprint": "very broad",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

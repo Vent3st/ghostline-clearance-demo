@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 30,
-      "dob": "3/XX/1996",
+      "dob": "10/XX/1996",
       "addresses": [
         {
           "addressHash": "A-AMA-HOME",
@@ -177,6 +177,39 @@
         }
       ],
       "occupation": "Detection Engineer",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "kamara",
+          "url": "linkedin.com/in/kamara",
+          "followers": 503,
+          "isVerified": false,
+          "lastActive": "11/2025",
+          "visibility": "public"
+        },
+        {
+          "platform": "Twitch",
+          "kind": "casual",
+          "handle": "kit.amara",
+          "url": "twitch.tv/kit.amara",
+          "followers": 133363,
+          "isVerified": true,
+          "lastActive": "5/2024",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "YouTube",
+          "kind": "casual",
+          "handle": "kdrift",
+          "url": "youtube.com/@kdrift",
+          "followers": 123277,
+          "isVerified": false,
+          "lastActive": "1/2020",
+          "visibility": "public"
+        }
+      ],
+      "socialFootprint": "moderate",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

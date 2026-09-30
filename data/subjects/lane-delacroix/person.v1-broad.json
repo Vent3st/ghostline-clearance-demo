@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 57,
-      "dob": "11/XX/1969",
+      "dob": "10/XX/1969",
       "addresses": [
         {
           "addressHash": "A-DEL-HOME",
@@ -173,6 +173,39 @@
         }
       ],
       "occupation": "Line Captain",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "ldelacroix",
+          "url": "linkedin.com/in/ldelacroix",
+          "followers": 2099,
+          "isVerified": true,
+          "lastActive": "9/2024",
+          "visibility": "public"
+        },
+        {
+          "platform": "Facebook",
+          "kind": "casual",
+          "handle": "lane.delacroix",
+          "url": "facebook.com/lane.delacroix",
+          "followers": 49,
+          "isVerified": false,
+          "lastActive": "10/2024",
+          "visibility": "public"
+        },
+        {
+          "platform": "Strava",
+          "kind": "casual",
+          "handle": "lhalcyon",
+          "url": "strava.com/athletes/lhalcyon",
+          "followers": 7692,
+          "isVerified": false,
+          "lastActive": "8/2024",
+          "visibility": "private"
+        }
+      ],
+      "socialFootprint": "moderate",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

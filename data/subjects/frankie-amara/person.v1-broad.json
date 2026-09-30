@@ -10,7 +10,7 @@
         "suffix": ""
       },
       "age": 38,
-      "dob": "11/XX/1988",
+      "dob": "2/XX/1988",
       "addresses": [
         {
           "addressHash": "A-AMA-HOME",
@@ -191,6 +191,39 @@
         }
       ],
       "occupation": "Logistics NCO",
+      "socialProfiles": [
+        {
+          "platform": "LinkedIn",
+          "kind": "professional",
+          "handle": "famara",
+          "url": "linkedin.com/in/famara",
+          "followers": 471,
+          "isVerified": true,
+          "lastActive": "8/2025",
+          "visibility": "restricted"
+        },
+        {
+          "platform": "Strava",
+          "kind": "casual",
+          "handle": "frankie.amara",
+          "url": "strava.com/athletes/frankie.amara",
+          "followers": 1477,
+          "isVerified": false,
+          "lastActive": "12/2019",
+          "visibility": "public"
+        },
+        {
+          "platform": "Pinterest",
+          "kind": "casual",
+          "handle": "fcove",
+          "url": "pinterest.com/fcove",
+          "followers": 534,
+          "isVerified": false,
+          "lastActive": "10/2020",
+          "visibility": "restricted"
+        }
+      ],
+      "socialFootprint": "moderate",
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false

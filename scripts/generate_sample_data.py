@@ -169,6 +169,34 @@ EMPLOYERS = {
     "plumbing":           [("Tanner Mechanical Services", "Master Plumber"), ("Kirby Drive Mechanical", "Service Lead")],
 }
 
+# Invented social handles. Professional and casual are separated because a clearance
+# reviewer treats them differently: a professional profile corroborates employment,
+# a casual one is where public signal leaks. Footprint size varies a lot by design —
+# some subjects are nearly absent, a few are very online.
+SOCIAL_PRO = [
+    ("LinkedIn", "linkedin.com/in/{h}"), ("GitHub", "github.com/{h}"),
+    ("Google Scholar", "scholar.google.com/citations?user={h}"),
+    ("ResearchGate", "researchgate.net/profile/{h}"),
+    ("Behance", "behance.net/{h}"), ("Personal site", "{h}.example.com"),
+    ("Speaker profile", "sessionize.com/{h}"),
+]
+SOCIAL_CASUAL = [
+    ("X", "x.com/{h}"), ("Instagram", "instagram.com/{h}"), ("Reddit", "reddit.com/user/{h}"),
+    ("TikTok", "tiktok.com/@{h}"), ("Facebook", "facebook.com/{h}"), ("Strava", "strava.com/athletes/{h}"),
+    ("Pinterest", "pinterest.com/{h}"), ("Twitch", "twitch.tv/{h}"), ("YouTube", "youtube.com/@{h}"),
+    ("Mastodon", "mastodon.social/@{h}"), ("Letterboxd", "letterboxd.com/{h}"),
+]
+
+# (label, n_professional, n_casual) — the shape of the roster's footprints. Weighted
+# by repetition: a thin footprint is interesting but should not be the common case,
+# and the demo needs subjects with enough surface to be worth reviewing.
+FOOTPRINT_TIERS = [
+    ("minimal", 1, 1),
+    ("moderate", 1, 2), ("moderate", 2, 2), ("moderate", 1, 3), ("moderate", 2, 3),
+    ("broad", 2, 4), ("broad", 3, 3), ("broad", 2, 5),
+    ("very broad", 3, 5), ("very broad", 3, 6), ("very broad", 4, 5),
+]
+
 # Distinct pull dates so no card reads "undated". Demo trio pulled today.
 PULL_DATES = ["2026-06-19", "2026-06-20", "2026-06-24", "2026-07-15", "2026-07-24",
               "2026-08-02", "2026-08-11", "2026-08-19", "2026-09-04", "2026-09-12",
@@ -177,6 +205,18 @@ PULL_DATES = ["2026-06-19", "2026-06-20", "2026-06-24", "2026-07-15", "2026-07-2
 BY_SLUG = {r[0]: r for r in ROSTER}
 FAM_OF = {s: fam for fam, (_, _, _, members) in FAMILIES.items() for s, _ in members}
 ROLE_OF = {s: FAMILIES[FAM_OF[s]][2] for s in BY_SLUG}
+
+
+# Today is 2026-09-29 in this corpus, so nothing may be "last seen" after 9/2026 —
+# a future activity date reads as a data bug to anyone who notices it.
+NOW_Y, NOW_M = 2026, 9
+
+
+def recent(rnd: random.Random, earliest_year: int) -> str:
+    """A month/year no later than the corpus date."""
+    y = rnd.randint(earliest_year, NOW_Y)
+    m = rnd.randint(1, NOW_M if y == NOW_Y else 12)
+    return f"{m}/{y}"
 
 
 def eid(slug: str) -> str:
@@ -322,6 +362,48 @@ def build() -> dict[str, dict]:
                 "isCurrent": k == 0,
             })
             year = from_y
+        # --- social footprint -------------------------------------------------
+        # The curated trio anchors the walkthrough, so they always have a footprint
+        # worth opening; everyone else draws from the weighted tiers.
+        if slug.startswith("demo-"):
+            tier_label, n_pro, n_cas = ("very broad", 3, 5)
+        else:
+            tier_label, n_pro, n_cas = FOOTPRINT_TIERS[rnd.randrange(len(FOOTPRINT_TIERS))]
+        base = f"{first[0]}{last.split()[-1]}".lower()
+        handles = [
+            base, f"{first}.{last.split()[-1]}".lower(), f"{first}{rnd.randint(2, 99)}".lower(),
+            f"{nick}{last.split()[-1]}".lower(), f"{first[0]}{nick}".lower(),
+            f"the{nick}".lower(), f"{last.split()[-1]}{rnd.randint(10, 99)}".lower(),
+        ]
+        socials = []
+        cas_start = rnd.randrange(len(SOCIAL_CASUAL))
+        others = SOCIAL_PRO[1:]
+        off = rnd.randrange(len(others))
+        pro_order = [SOCIAL_PRO[0]] + [others[(off + i) % len(others)] for i in range(len(others))]
+        for k in range(n_pro):
+            plat, tpl = pro_order[k % len(pro_order)]
+            h = handles[(k * 2) % len(handles)]
+            socials.append({
+                "platform": plat, "kind": "professional", "handle": h,
+                "url": tpl.format(h=h),
+                "followers": rnd.choice([None, rnd.randint(120, 2400), rnd.randint(300, 900)]),
+                "isVerified": plat == "LinkedIn" and rnd.random() > 0.65,
+                "lastActive": recent(rnd, 2024),
+                "visibility": rnd.choice(["public", "public", "restricted"]),
+            })
+        for k in range(n_cas):
+            plat, tpl = SOCIAL_CASUAL[(cas_start + k) % len(SOCIAL_CASUAL)]
+            h = handles[(k * 3 + 1) % len(handles)]
+            reach = rnd.choice([rnd.randint(40, 600), rnd.randint(600, 9000), rnd.randint(9000, 140000)])
+            socials.append({
+                "platform": plat, "kind": "casual", "handle": h,
+                "url": tpl.format(h=h),
+                "followers": reach,
+                "isVerified": reach > 90000 and rnd.random() > 0.5,
+                "lastActive": recent(rnd, 2019),
+                "visibility": rnd.choice(["public", "public", "public", "restricted", "private"]),
+            })
+
         pulled = ("2026-09-29" if slug.startswith("demo-")
                   else PULL_DATES[rnd.randrange(len(PULL_DATES))])
 
@@ -333,6 +415,7 @@ def build() -> dict[str, dict]:
                 "addresses": addresses, "phoneNumbers": phones, "emailAddresses": emails,
                 "relativesSummary": rels, "akas": akas, "associatesSummary": associates,
                 "employers": employers, "occupation": picks[0][1],
+                "socialProfiles": socials, "socialFootprint": tier_label,
                 "indicators": [], "isPublic": True, "sparseFlag": False,
             }],
             "requestId": f"DEMO-{eid(slug)}", "requestType": "Person",
