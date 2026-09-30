@@ -150,7 +150,7 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
       {m.adjacency.length > 0 ? (
         <section id="adjacency">
           <div className="wrap">
-            <div className="sec-head"><span className="eyebrow">Critical adjacency · utilities, government, military, HQs &amp; institutions</span><h2>Where the subject sits, relative to critical sites.</h2><p>Career- and education-relevant sites near the subject&apos;s cities, by proximity.</p></div>
+            <div className="sec-head"><span className="eyebrow">Critical adjacency · utilities, government, military, HQs &amp; institutions</span><h2>Proximity to critical sites.</h2><p>Career- and education-relevant sites near the subject&apos;s cities.</p></div>
             <div className="card" style={{ padding: 14 }}><AdjacencyMap adj={m.adjacency} subjectName={m.alias.alias} focusHref={graphHref} /></div>
             <div className="legend" style={{ marginTop: 10 }}>
               <span><i style={{ background: "var(--address)" }} />Utility</span>
@@ -267,7 +267,7 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
           <div className="wrap">
             <div className="sec-head">
               <span className="eyebrow">Public account surface · professional &amp; casual</span>
-              <h2>Where the subject is publicly visible.</h2>
+              <h2>Social media &amp; digital footprint.</h2>
               <p>
                 {m.socialFootprint ? `${m.socialFootprint} footprint — ` : ""}
                 {m.social.filter((x) => x.kind === "professional").length} professional ·{" "}
