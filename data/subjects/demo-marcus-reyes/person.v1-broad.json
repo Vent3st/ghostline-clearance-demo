@@ -1,97 +1,119 @@
 {
   "persons": [
     {
-      "entityId": "E-DEMO-MARCUS",
-      "fullName": "Marcus D Reyes",
+      "entityId": "E-MR-4A1",
+      "fullName": "Marcus Reyes",
       "name": {
         "firstName": "Marcus",
-        "middleName": "D",
+        "middleName": "",
         "lastName": "Reyes",
         "suffix": ""
       },
-      "age": 41,
-      "dob": "12/XX/1985",
+      "age": 52,
+      "dob": "6/XX/1974",
       "addresses": [
         {
-          "addressHash": "A-MR-1",
-          "fullAddress": "1201 W 6th St, Austin, TX 78703",
-          "houseNumber": "1201",
+          "addressHash": "A-REY-HOME",
+          "fullAddress": "3202 Barton Springs Rd, Austin, TX 78745",
+          "houseNumber": "3202",
+          "street": "Barton Springs Rd",
           "city": "Austin",
           "state": "TX",
           "zip": "78703",
-          "firstReportedDate": "5/1/2017",
-          "lastReportedDate": "8/1/2025",
+          "firstReportedDate": "9/1/1994",
+          "lastReportedDate": "6/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-MR-1",
+          "fullAddress": "2112 Barton Springs Rd, Austin, TX 78703",
+          "houseNumber": "2112",
+          "street": "Barton Springs Rd",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "3/1/1998",
+          "lastReportedDate": "2/1/2004",
           "isDeliverable": true,
           "isPublic": true
         },
         {
           "addressHash": "A-MR-2",
-          "fullAddress": "900 Bagby St, Houston, TX 77002",
-          "houseNumber": "900",
+          "fullAddress": "3145 Kirby Dr, Houston, TX 77002",
+          "houseNumber": "3145",
+          "street": "Kirby Dr",
           "city": "Houston",
           "state": "TX",
-          "zip": "77002",
-          "firstReportedDate": "1/1/2011",
-          "lastReportedDate": "4/1/2017",
+          "zip": "77007",
+          "firstReportedDate": "7/1/1992",
+          "lastReportedDate": "11/1/1997",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-MRCS",
+          "fullAddress": "5969 Barton Springs Rd, Austin, TX 78703",
+          "houseNumber": "5969",
+          "street": "Barton Springs Rd",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78745",
+          "firstReportedDate": "5/1/1995",
+          "lastReportedDate": "3/1/1999",
           "isDeliverable": true,
           "isPublic": true
         }
       ],
       "phoneNumbers": [
         {
-          "phoneNumber": "(512) 555-0101",
-          "company": "AT&T Mobility",
+          "phoneNumber": "(512) 555-0483",
+          "company": "Verizon Wireless",
           "phoneType": "Wireless",
+          "isConnected": false,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-2161",
+          "company": "Bandwidth.com",
+          "phoneType": "VOIP",
           "isConnected": true,
           "isPublic": true
         }
       ],
       "emailAddresses": [
         "m.reyes@example.com",
-        "m.reyes@example.com"
+        "marcus34@example.com",
+        "cash.reyes@example.com"
       ],
       "relativesSummary": [
         {
-          "entityId": "E-STERLING-VAUGHN",
-          "firstName": "Sterling",
+          "entityId": "E-CS-3A1C",
+          "firstName": "Cameron",
           "middleName": "",
-          "lastName": "Vaughn",
+          "lastName": "Sorensen",
           "suffix": "",
           "relativeType": "Associate",
           "relativeLevel": "ab",
-          "score": 150,
-          "sharedHouseholdIds": [],
-          "city": "Austin",
-          "state": "TX",
-          "isDeceased": false
-        },
-        {
-          "entityId": "R-MR-SP",
-          "firstName": "Dana",
-          "middleName": "",
-          "lastName": "Reyes",
-          "suffix": "",
-          "relativeType": "Spouse",
-          "relativeLevel": "ab",
-          "score": 475,
+          "score": 164,
           "sharedHouseholdIds": [
-            "HH-MR"
+            "A-RM-MRCS"
           ],
           "city": "Austin",
           "state": "TX",
           "isDeceased": false
         },
         {
-          "entityId": "R-MR-PA",
-          "firstName": "Iris",
+          "entityId": "R-MR-EX",
+          "firstName": "Beth",
           "middleName": "",
           "lastName": "Reyes",
           "suffix": "",
-          "relativeType": "Parent",
-          "relativeLevel": "ab",
-          "score": 200,
+          "relativeType": "Aunt/Uncle",
+          "relativeLevel": "ad",
+          "score": 108,
           "sharedHouseholdIds": [],
-          "city": "Houston",
+          "city": "Austin",
           "state": "TX",
           "isDeceased": false
         }
@@ -101,18 +123,34 @@
           "firstName": "Marcus",
           "middleName": "",
           "lastName": "Reyes"
+        },
+        {
+          "firstName": "Marcus",
+          "middleName": "Cash",
+          "lastName": "Reyes"
         }
       ],
-      "associatesSummary": [],
+      "associatesSummary": [
+        {
+          "firstName": "Devon",
+          "middleName": "",
+          "lastName": "Brandt"
+        },
+        {
+          "firstName": "Lane",
+          "middleName": "",
+          "lastName": "Delacroix"
+        }
+      ],
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false
     }
   ],
-  "requestId": "DEMO-E-DEMO-MARCUS",
+  "requestId": "DEMO-E-MR-4A1",
   "requestType": "Person",
-  "requestTime": "2026-09-29T15:16:53.345458",
+  "requestTime": "2026-09-29T00:00:00.000000",
   "isError": false,
   "_mock": true,
-  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
 }

@@ -1,92 +1,116 @@
 {
   "persons": [
     {
-      "entityId": "E-DEMO-TREVOR",
-      "fullName": "Trevor K Osborne",
+      "entityId": "E-TO-4A3",
+      "fullName": "Trevor Osborne",
       "name": {
         "firstName": "Trevor",
-        "middleName": "K",
+        "middleName": "",
         "lastName": "Osborne",
         "suffix": ""
       },
-      "age": 45,
-      "dob": "4/XX/1981",
+      "age": 48,
+      "dob": "8/XX/1978",
       "addresses": [
         {
-          "addressHash": "A-TO-1",
-          "fullAddress": "300 E Palm Valley Blvd, Round Rock, TX 78664",
-          "houseNumber": "300",
-          "city": "Round Rock",
+          "addressHash": "A-OSB-HOME",
+          "fullAddress": "6341 Rainey St, Austin, TX 78702",
+          "houseNumber": "6341",
+          "street": "Rainey St",
+          "city": "Austin",
           "state": "TX",
-          "zip": "78664",
-          "firstReportedDate": "3/1/2016",
-          "lastReportedDate": "8/1/2025",
+          "zip": "78745",
+          "firstReportedDate": "7/1/1998",
+          "lastReportedDate": "10/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-TO-1",
+          "fullAddress": "3213 Rainey St, Austin, TX 78703",
+          "houseNumber": "3213",
+          "street": "Rainey St",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78745",
+          "firstReportedDate": "7/1/2002",
+          "lastReportedDate": "4/1/2008",
           "isDeliverable": true,
           "isPublic": true
         },
         {
           "addressHash": "A-TO-2",
-          "fullAddress": "78 Guadalupe St, Austin, TX 78703",
-          "houseNumber": "78",
+          "fullAddress": "1421 Gattis School Rd, Round Rock, TX 78681",
+          "houseNumber": "1421",
+          "street": "Gattis School Rd",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78681",
+          "firstReportedDate": "4/1/1996",
+          "lastReportedDate": "4/1/2001",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-TODH",
+          "fullAddress": "2319 S Congress Ave, Austin, TX 78702",
+          "houseNumber": "2319",
+          "street": "S Congress Ave",
           "city": "Austin",
           "state": "TX",
-          "zip": "78703",
-          "firstReportedDate": "1/1/2009",
-          "lastReportedDate": "2/1/2016",
+          "zip": "78745",
+          "firstReportedDate": "9/1/1999",
+          "lastReportedDate": "4/1/2003",
           "isDeliverable": true,
           "isPublic": true
         }
       ],
       "phoneNumbers": [
         {
-          "phoneNumber": "(512) 555-0103",
-          "company": "Verizon",
-          "phoneType": "Wireless",
+          "phoneNumber": "(512) 555-0561",
+          "company": "Comcast Phone",
+          "phoneType": "LandLine",
           "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-7208",
+          "company": "Spectrum Voice",
+          "phoneType": "LandLine",
+          "isConnected": false,
           "isPublic": true
         }
       ],
       "emailAddresses": [
-        "t.osborne@example.com"
+        "t.osborne@example.net",
+        "trevor70@example.org"
       ],
       "relativesSummary": [
         {
-          "entityId": "E-REX-TANNER",
-          "firstName": "Rex",
+          "entityId": "E-DH-DA8E",
+          "firstName": "Devon",
           "middleName": "",
-          "lastName": "Tanner",
+          "lastName": "Holloway",
           "suffix": "",
           "relativeType": "Associate",
           "relativeLevel": "ab",
-          "score": 150,
-          "sharedHouseholdIds": [],
-          "city": "Round Rock",
+          "score": 125,
+          "sharedHouseholdIds": [
+            "A-RM-TODH"
+          ],
+          "city": "Austin",
           "state": "TX",
           "isDeceased": false
         },
         {
-          "entityId": "E-NEAL-BRACKETT",
-          "firstName": "Neal",
-          "middleName": "",
-          "lastName": "Brackett",
-          "suffix": "",
-          "relativeType": "Associate",
-          "relativeLevel": "ab",
-          "score": 150,
-          "sharedHouseholdIds": [],
-          "city": "Round Rock",
-          "state": "TX",
-          "isDeceased": false
-        },
-        {
-          "entityId": "R-TO-PA",
-          "firstName": "Owen",
+          "entityId": "R-TO-EX",
+          "firstName": "Aiko",
           "middleName": "",
           "lastName": "Osborne",
           "suffix": "",
-          "relativeType": "Parent",
-          "relativeLevel": "ab",
-          "score": 200,
+          "relativeType": "Aunt/Uncle",
+          "relativeLevel": "ad",
+          "score": 125,
           "sharedHouseholdIds": [],
           "city": "Austin",
           "state": "TX",
@@ -100,16 +124,27 @@
           "lastName": "Osborne"
         }
       ],
-      "associatesSummary": [],
+      "associatesSummary": [
+        {
+          "firstName": "Wren",
+          "middleName": "",
+          "lastName": "Sabin"
+        },
+        {
+          "firstName": "Marlow",
+          "middleName": "",
+          "lastName": "Ferro"
+        }
+      ],
       "indicators": [],
       "isPublic": true,
       "sparseFlag": false
     }
   ],
-  "requestId": "DEMO-E-DEMO-TREVOR",
+  "requestId": "DEMO-E-TO-4A3",
   "requestType": "Person",
-  "requestTime": "2026-09-29T15:16:53.345458",
+  "requestTime": "2026-09-29T00:00:00.000000",
   "isError": false,
   "_mock": true,
-  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Illustrative sample data only."
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
 }

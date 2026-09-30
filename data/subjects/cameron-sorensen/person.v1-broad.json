@@ -1,0 +1,195 @@
+{
+  "persons": [
+    {
+      "entityId": "E-CS-3A1C",
+      "fullName": "Cameron Sorensen",
+      "name": {
+        "firstName": "Cameron",
+        "middleName": "",
+        "lastName": "Sorensen",
+        "suffix": ""
+      },
+      "age": 54,
+      "dob": "8/XX/1972",
+      "addresses": [
+        {
+          "addressHash": "A-SOR-HOME",
+          "fullAddress": "5446 E 6th St, Austin, TX 78745",
+          "houseNumber": "5446",
+          "street": "E 6th St",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78703",
+          "firstReportedDate": "5/1/1992",
+          "lastReportedDate": "10/1/2026",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-CS-1",
+          "fullAddress": "4975 Rainey St, Austin, TX 78702",
+          "houseNumber": "4975",
+          "street": "Rainey St",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78702",
+          "firstReportedDate": "3/1/1996",
+          "lastReportedDate": "3/1/2002",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-CS-2",
+          "fullAddress": "1241 Sunrise Rd, Round Rock, TX 78681",
+          "houseNumber": "1241",
+          "street": "Sunrise Rd",
+          "city": "Round Rock",
+          "state": "TX",
+          "zip": "78681",
+          "firstReportedDate": "8/1/1990",
+          "lastReportedDate": "3/1/1995",
+          "isDeliverable": true,
+          "isPublic": true
+        },
+        {
+          "addressHash": "A-RM-MRCS",
+          "fullAddress": "883 Rainey St, Austin, TX 78745",
+          "houseNumber": "883",
+          "street": "Rainey St",
+          "city": "Austin",
+          "state": "TX",
+          "zip": "78702",
+          "firstReportedDate": "10/1/1993",
+          "lastReportedDate": "9/1/1997",
+          "isDeliverable": true,
+          "isPublic": true
+        }
+      ],
+      "phoneNumbers": [
+        {
+          "phoneNumber": "(512) 555-0322",
+          "company": "Verizon Wireless",
+          "phoneType": "Wireless",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-3749",
+          "company": "Spectrum Voice",
+          "phoneType": "LandLine",
+          "isConnected": true,
+          "isPublic": true
+        },
+        {
+          "phoneNumber": "(512) 555-0242",
+          "company": "Spectrum Voice",
+          "phoneType": "LandLine",
+          "isConnected": true,
+          "isPublic": true
+        }
+      ],
+      "emailAddresses": [
+        "c.sorensen@example.net",
+        "cameron60@example.com",
+        "aster.sorensen@example.com"
+      ],
+      "relativesSummary": [
+        {
+          "entityId": "E-JS-97B6",
+          "firstName": "Jordan",
+          "middleName": "",
+          "lastName": "Sorensen",
+          "suffix": "",
+          "relativeType": "Sibling",
+          "relativeLevel": "ab",
+          "score": 204,
+          "sharedHouseholdIds": [
+            "A-SOR-HOME"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-PS-BCF8",
+          "firstName": "Parker",
+          "middleName": "",
+          "lastName": "Sorensen",
+          "suffix": "",
+          "relativeType": "Parent",
+          "relativeLevel": "ac",
+          "score": 236,
+          "sharedHouseholdIds": [
+            "A-SOR-HOME"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "E-MR-4A1",
+          "firstName": "Marcus",
+          "middleName": "",
+          "lastName": "Reyes",
+          "suffix": "",
+          "relativeType": "Associate",
+          "relativeLevel": "ab",
+          "score": 144,
+          "sharedHouseholdIds": [
+            "A-RM-MRCS"
+          ],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        },
+        {
+          "entityId": "R-CS-EX",
+          "firstName": "Imani",
+          "middleName": "",
+          "lastName": "Sorensen",
+          "suffix": "",
+          "relativeType": "Cousin",
+          "relativeLevel": "ad",
+          "score": 105,
+          "sharedHouseholdIds": [],
+          "city": "Austin",
+          "state": "TX",
+          "isDeceased": false
+        }
+      ],
+      "akas": [
+        {
+          "firstName": "Cameron",
+          "middleName": "",
+          "lastName": "Sorensen"
+        },
+        {
+          "firstName": "Cameron",
+          "middleName": "Aster",
+          "lastName": "Sorensen"
+        }
+      ],
+      "associatesSummary": [
+        {
+          "firstName": "Marcus",
+          "middleName": "",
+          "lastName": "Reyes"
+        },
+        {
+          "firstName": "Elena",
+          "middleName": "",
+          "lastName": "Marlowe"
+        }
+      ],
+      "indicators": [],
+      "isPublic": true,
+      "sparseFlag": false
+    }
+  ],
+  "requestId": "DEMO-E-CS-3A1C",
+  "requestType": "Person",
+  "requestTime": "2026-09-29T00:00:00.000000",
+  "isError": false,
+  "_mock": true,
+  "_note": "FICTIONAL demo identity \u2014 invented, not a real person. Generated by scripts/generate_sample_data.py for illustration only."
+}
