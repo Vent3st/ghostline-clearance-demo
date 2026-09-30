@@ -11,6 +11,42 @@ import type { ResidencySpan } from "@/lib/graph";
  * Server component: it is pure layout maths over data the page already has, so
  * there is no reason to ship it to the client.
  */
+const ROW_H = 18;
+const ROW_GAP = 3;
+
+/**
+ * Greedy interval packing, one person at a time.
+ *
+ * Every span used to be absolutely positioned in a single 18px row, so a person
+ * with concurrent windows — a family home that runs for decades plus their own
+ * address plus a shared one — got bars stacked on top of each other and labels
+ * printed over labels. Spans are now placed in the first sub-row whose last bar
+ * has ended, which makes overlap structurally impossible within a row while
+ * keeping vertical alignment across people (the thing the chart exists to show).
+ */
+function packLane(
+  spans: ResidencySpan[],
+  horizon: number,
+  gap: number,
+): { rows: number; placed: { s: ResidencySpan; row: number }[] } {
+  const sorted = [...spans].sort((a, b) => a.from! - b.from!);
+  const rowEnds: number[] = [];
+  const placed: { s: ResidencySpan; row: number }[] = [];
+  for (const s of sorted) {
+    const from = s.from!;
+    const to = s.to ?? horizon;
+    let row = rowEnds.findIndex((end) => from >= end + gap);
+    if (row === -1) {
+      row = rowEnds.length;
+      rowEnds.push(to);
+    } else {
+      rowEnds[row] = to;
+    }
+    placed.push({ s, row });
+  }
+  return { rows: Math.max(1, rowEnds.length), placed };
+}
+
 export function ResidencyTimeline({ spans }: { spans: ResidencySpan[] }) {
   const dated = spans.filter((s) => s.from !== null);
   if (dated.length === 0) {
@@ -55,19 +91,27 @@ export function ResidencyTimeline({ spans }: { spans: ResidencySpan[] }) {
         Co-residency · {lanes.size} people · overlap means shared address
       </h2>
 
-      <div className="max-h-[30vh] overflow-auto px-5 py-2">
-        {[...lanes.entries()].map(([id, lane]) => (
-          <div key={id} className="mb-1 grid grid-cols-[130px_minmax(0,1fr)] items-center gap-3">
-            <span className="truncate text-right text-[11px]" title={lane.label}>
+      <div className="max-h-[38vh] overflow-auto px-5 py-2">
+        {[...lanes.entries()].map(([id, lane]) => {
+          const { rows, placed } = packLane(lane.spans, horizon, span * 0.012);
+          const laneH = rows * ROW_H + (rows - 1) * ROW_GAP;
+          return (
+          <div key={id} className="mb-1.5 grid grid-cols-[130px_minmax(0,1fr)] items-start gap-3">
+            <span className="truncate pt-[3px] text-right text-[11px]" title={lane.label}>
               {lane.label}
             </span>
-            <div className="relative h-[18px] rounded bg-muted/50">
-              {lane.spans.map((s, i) => {
+            <div className="relative rounded bg-muted/50" style={{ height: laneH }}>
+              {placed.map(({ s, row }, i) => {
                 const from = s.from!;
                 const to = s.to ?? horizon;
                 const left = ((from - min) / span) * 100;
                 const width = Math.max(1.2, ((to - from) / span) * 100);
                 const shared = (addrCount.get(s.addressId)?.size ?? 0) > 1;
+                // Street only; the city repeats down the lane and the full address
+                // stays in the tooltip. Below ~9% the bar cannot hold legible text at
+                // all, so it carries colour and position only.
+                const short = s.addressLabel.split(",")[0];
+                const showLabel = width >= 9;
                 return (
                   <div
                     key={`${s.addressId}-${i}`}
@@ -82,10 +126,12 @@ export function ResidencyTimeline({ spans }: { spans: ResidencySpan[] }) {
                       weight within the address hue, and the label uses --foreground so
                       it stays legible in both themes.
                     */
-                    className="absolute top-0 flex h-[18px] items-center overflow-hidden rounded-[3px] border px-1.5 text-[9px] font-medium text-foreground"
+                    className="absolute flex items-center overflow-hidden rounded-[3px] border px-1.5 text-[9px] font-medium text-foreground"
                     style={{
                       left: `${left}%`,
                       width: `${width}%`,
+                      top: row * (ROW_H + ROW_GAP),
+                      height: ROW_H,
                       background: shared
                         ? "color-mix(in srgb, var(--ent-address) 34%, var(--card))"
                         : "color-mix(in srgb, var(--ent-address) 15%, var(--card))",
@@ -97,13 +143,14 @@ export function ResidencyTimeline({ spans }: { spans: ResidencySpan[] }) {
                         : undefined,
                     }}
                   >
-                    <span className="truncate">{s.addressLabel}</span>
+                    {showLabel ? <span className="truncate">{short}</span> : null}
                   </div>
                 );
               })}
             </div>
           </div>
-        ))}
+          );
+        })}
 
         <div className="grid grid-cols-[130px_minmax(0,1fr)] gap-3 pt-1">
           <span />
