@@ -1,5 +1,10 @@
 # Ghostline — Clearance-Vetting Workbench (Demo)
 
+**Live demo → https://ghostline-clearance-demo.vercel.app**
+
+No login, no signup, no API keys. Land on the page, click **Launch demo →**, and you are in
+the clearance queue.
+
 A front-end demo of **Ghostline**: screen a visitor against watchlists in seconds,
 then escalate the same subject into a sourced, connection-mapped, confidence-scored
 clearance dossier. One platform, two depths.
@@ -9,6 +14,17 @@ clearance dossier. One platform, two depths.
 > not a background check or a consumer report, and it is not FCRA/DPPA/ICRAA-compliant.
 > The production system's data sources and collection/resolution methods are **not**
 > in this repository.
+
+## The 60-second path through it
+
+1. **https://ghostline-clearance-demo.vercel.app** — the marketing landing page. `/` redirects here.
+2. Click **Launch demo →** (top-right, or in the hero) — no gate, no form.
+3. **`/subjects`** — the clearance queue, 12 subjects under deterministic pseudonyms.
+4. Open **Marcus "Cash" Reyes** — the sourced dossier: confidence gauge, critical-adjacency map,
+   relatives at High/Medium/Low likelihood, chain-of-custody panel.
+5. **Unlock Deep Clearance** on that page — OCEAN profile, SF-86 adjudicator matrix, sanctions
+   checks, source-class coverage matrix.
+6. **`/graph`** — the relationship graph across all subjects.
 
 ## What to look at
 
@@ -44,9 +60,15 @@ clearance dossier. One platform, two depths.
 No API keys or environment variables required.
 
 ```bash
-npm install
+npm ci          # lockfile is committed; `npm install` works too
 npm run dev
 # open http://localhost:3000
+```
+
+For a production build (what the live demo serves):
+
+```bash
+npm run build && npm run start
 ```
 
 Stack: Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · Radix/shadcn.
