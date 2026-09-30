@@ -7,6 +7,7 @@ import { connection } from "next/server";
 
 import { RAW_DIR, assertInside, isSafeSegment } from "./paths";
 import { aliasForName, aliasForSlug, type Alias } from "./identity";
+import { adjudication } from "@/lib/adjudication";
 import { buildLicensing, type Licensing } from "./licensing";
 
 /**
@@ -294,7 +295,47 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
   if (relResolved.some((r) => (r.score ?? 0) >= 400)) {
     risks.push({ title: "High-confidence household / kinship links present", source: "source · relative graph · shared-household ids", sev: "info" });
   }
-  risks.push({ title: "No sanctions, debarment, or federal-LE hit on the subject", source: "source · OFAC / SAM / FBI / DOJ · checked, no hits", sev: "info" });
+  // Screen result comes from the shared adjudication, so this row can never
+  // contradict the deep panel's federal checks for the same subject.
+  const adj = adjudication(slug);
+  if (adj.hasDebar) {
+    risks.push({
+      title: `Active federal exclusion on record (SAM.gov, ${adj.yDebar})`,
+      source: "source · SAM.gov exclusions / EPLS · 1 hit",
+      sev: "warning",
+    });
+    risks.push({
+      title: `Dismissed criminal matter (${adj.yDebar - 2})`,
+      source: "source · county DA index · disposition dismissed",
+      sev: "info",
+    });
+  } else if (adj.hasAdverse) {
+    risks.push({
+      title: `Settled regulatory proceeding (${adj.ySec}) and licensing reprimand (${adj.yBoard})`,
+      source: "source · SEC administrative proceedings + state licensing boards · 2 hits",
+      sev: "warning",
+    });
+  } else {
+    risks.push({
+      title: "No sanctions, debarment, or federal-LE hit on the subject",
+      source: "source · OFAC / SAM / FBI / DOJ · checked, no hits",
+      sev: "info",
+    });
+  }
+  if (adj.finBad) {
+    risks.push({
+      title: "Financial delinquency >120d on a closed account (resolved)",
+      source: "source · derogatory tradeline summary · resolved",
+      sev: "info",
+    });
+  }
+  if (adj.medFI) {
+    risks.push({
+      title: "Foreign-resident relative — reportable under SF-86 §19",
+      source: "source · relative graph · residency inferred",
+      sev: "info",
+    });
+  }
 
   const adjacency = computeAdjacency(
     addresses.map((a) => a.city ?? "").filter(Boolean),
@@ -345,7 +386,11 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
       { name: "Phone / contact", count: phones.length, conf: "0.86" },
       { name: "Relative / associate graph", count: relResolved.length, conf: "0.88" },
       { name: "Employment history", count: employment.length, conf: "0.81" },
-      { name: "Sanctions / LE screen", count: "0 hits", conf: "—" },
+      {
+        name: "Sanctions / LE screen",
+        count: adj.screenHits === 0 ? "0 hits" : `${adj.screenHits} hits`,
+        conf: "—",
+      },
       { name: "Aggregated public & licensed records", count: "multiple sources" },
     ],
     sealedAt: new Date().toISOString().replace(/\.\d+Z$/, "Z"),

@@ -94,8 +94,11 @@ export function DeepReport({ model: m }: { model: DeepModel }) {
             <polygon points={radarPoints(scores, cx, cy, R)} fill="color-mix(in srgb, var(--primary) 30%, transparent)" stroke="var(--primary)" strokeWidth="2" />
             {axisPts.map((p) => <text key={p.key} x={p.lx} y={p.ly} textAnchor="middle" dominantBaseline="middle" fontFamily="var(--mono)" fontSize="10" fill="var(--muted)">{p.key}</text>)}
           </svg>
+          {/* The "INFERRED · UNFALSIFIED" chip is gone: the panel is headed
+              "Psychometric profile" and the behavioural summary below already closes
+              with "Inferred, not clinically validated", so the chip restated a
+              caveat the reader has twice over. panelStatus stays on the model. */}
           <div style={{ display: "grid", gap: 8 }}>
-            <Chip text={m.signals.panelStatus} color="var(--warn)" />
             {m.ocean.map((t) => (
               <div key={t.key} style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <span style={{ width: 128, flex: "0 0 auto", fontSize: 13, color: "var(--ink)" }}>{t.label}</span>

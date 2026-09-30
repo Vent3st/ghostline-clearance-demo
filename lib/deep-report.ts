@@ -1,6 +1,6 @@
 import "server-only";
+import { adjudication } from "@/lib/adjudication";
 
-import { createHash } from "node:crypto";
 import { cache } from "react";
 
 import { buildReportModel } from "./report";
@@ -49,16 +49,13 @@ export interface DeepModel {
   vendors: { tally: { status: VendorStatus; n: number }[]; rows: VendorLite[] };
   sf86: Sf86Row[];
   vectors: Vector[];
-  signals: { rows: SignalLite[]; resolvable: number; constrained: number; excluded: number; panelStatus: string };
+  /** panelStatus is deliberately absent: nothing renders it, and props serialize. */
+  signals: { rows: SignalLite[]; resolvable: number; constrained: number; excluded: number };
   confidence: ConfRow[];
   nextActions: { p0: string[]; p1: string[]; p2: string[] };
   sources: string[];
 }
 
-function seedInts(slug: string, n: number): number[] {
-  const h = createHash("sha256").update(`deep:${slug}`).digest();
-  return Array.from({ length: n }, (_, i) => h[i % h.length]);
-}
 const band = (s: number): OceanTrait["band"] => (s >= 67 ? "High" : s >= 40 ? "Moderate" : "Low");
 
 const OCEAN_DEF: [string, string, Record<OceanTrait["band"], string>][] = [
@@ -76,26 +73,9 @@ const METRIC_DEF: [string, string][] = [
   ["Disclosure propensity", "openness to self-report on record"],
 ];
 export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => {
-  const seeds = seedInts(slug, 16);
-
-  /**
-   * Adjudication profile. Deliberately spread across the roster so the demo shows
-   * a realistic mix rather than a wall of "No hits": most subjects clean, some with
-   * a reportable-but-not-disqualifying item, one in ten with an actual debarment,
-   * one in ten with an adverse regulatory or licensing action. Seeded on the slug,
-   * so a given subject always adjudicates the same way.
-   */
-  const p = seeds[10] % 10;
-  const profile: "clean" | "reportable" | "debarred" | "adverse" =
-    p <= 5 ? "clean" : p <= 7 ? "reportable" : p === 8 ? "debarred" : "adverse";
-  const medFI = profile === "reportable" || slug === "demo-marcus-reyes";
-  const hasDebar = profile === "debarred";
-  const hasAdverse = profile === "adverse";
-  const finBad = profile !== "clean" && seeds[11] % 3 === 0;
-  const inGto = profile !== "clean" && seeds[12] % 4 === 0;
-  const yDebar = 2018 + (seeds[13] % 7);
-  const ySec = 2017 + (seeds[14] % 8);
-  const yBoard = 2016 + (seeds[15] % 9);
+  // One shared derivation with lib/report.ts — see lib/adjudication.ts for why.
+  const { seeds, medFI, hasDebar, hasAdverse, finBad, inGto, yDebar, ySec, yBoard } =
+    adjudication(slug);
 
   const ocean: OceanTrait[] = OCEAN_DEF.map(([key, label, notes], i) => {
     const score = 25 + (seeds[i] % 66);
@@ -221,7 +201,6 @@ export const buildDeepModel = cache(async (slug: string): Promise<DeepModel> => 
     resolvable: sig.resolvable,
     constrained: sig.constrained,
     excluded: sig.excluded,
-    panelStatus: sig.panelStatus,
     rows: sig.rows.map((r) => ({ domain: shortDomain(r.domain), signal: r.signal, status: r.status })),
   };
 
