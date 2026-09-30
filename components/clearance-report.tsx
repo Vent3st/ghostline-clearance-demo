@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Activity, AtSign, BookOpen, Bookmark, Briefcase, Camera, Clapperboard, Code, Globe, GraduationCap, Hash, Link2, MessagesSquare, Mic, Music, Palette, Play, Tv, Users } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { BRAND_MARKS } from "@/components/brand-icons";
 import type { ReportModel } from "@/lib/report";
 import { bandColor, scoreBand } from "@/lib/utils";
 import { AdjacencyMap } from "./adjacency-map";
@@ -181,7 +182,7 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
             <div className="sec-head">
               <span className="eyebrow">Connection graph</span>
               <h2>The web around the subject.</h2>
-              <p>People, family, associates, addresses and phones linked to the subject.{graphHref ? " Click to open the full interactive graph for this subject →" : ""}</p>
+              <p>People, family, associates, addresses and phones linked to the subject.</p>
             </div>
             {graphHref ? (
               <Link href={graphHref} className="net" style={{ display: "block", cursor: "pointer" }} aria-label="Open the full interactive graph for this subject">
@@ -293,6 +294,10 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
                         <div className="sr" key={i}>
                           <span className="n" style={{ display: "flex", alignItems: "center", gap: 8 }}>
                             {(() => {
+                              // Official mark where one is freely licensed (CC0, see
+                              // components/brand-icons.ts); a generic glyph otherwise, so
+                              // nothing is a hand-copied logo.
+                              const brand = BRAND_MARKS[x.platform];
                               const Icon = SOCIAL_ICON[x.platform] ?? Link2;
                               return (
                                 <span
@@ -305,14 +310,28 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
                                     height: 22,
                                     flex: "0 0 auto",
                                     borderRadius: 5,
-                                    background:
-                                      kind === "professional"
+                                    background: brand
+                                      ? `color-mix(in srgb, ${brand.hex} 14%, transparent)`
+                                      : kind === "professional"
                                         ? "color-mix(in srgb, var(--primary) 16%, transparent)"
                                         : "color-mix(in srgb, var(--phone) 18%, transparent)",
                                     color: kind === "professional" ? "var(--primary)" : "var(--phone)",
                                   }}
                                 >
-                                  <Icon size={13} strokeWidth={2} />
+                                  {brand ? (
+                                    <svg
+                                      width="13"
+                                      height="13"
+                                      viewBox="0 0 24 24"
+                                      role="img"
+                                      aria-hidden
+                                      fill={brand.hex}
+                                    >
+                                      <path d={brand.path} />
+                                    </svg>
+                                  ) : (
+                                    <Icon size={13} strokeWidth={2} />
+                                  )}
                                 </span>
                               );
                             })()}
@@ -325,7 +344,6 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
                           <span className="m">
                             {x.followers != null ? `${fmtReach(x.followers)} followers · ` : ""}
                             {x.visibility ?? "unknown"}
-                            {x.lastActive ? ` · last seen ${x.lastActive}` : ""}
                           </span>
                         </div>
                       ))}

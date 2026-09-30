@@ -82,7 +82,6 @@ export interface ReportModel {
     handle: string;
     followers: number | null;
     verified: boolean;
-    lastActive: string | null;
     visibility: string | null;
   }[];
   socialFootprint: string | null;
@@ -370,7 +369,6 @@ export const buildReportModel = cache(async (slug: string): Promise<ReportModel 
       handle: x.handle!,
       followers: typeof x.followers === "number" ? x.followers : null,
       verified: Boolean(x.isVerified),
-      lastActive: x.lastActive ?? null,
       visibility: x.visibility ?? null,
     }));
 
