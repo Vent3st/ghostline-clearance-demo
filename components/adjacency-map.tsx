@@ -24,7 +24,14 @@ const ADJ_COLOR: Record<string, string> = {
 const W = 1000, H = 620, cx = 500, cy = 300;
 const xStretch = 1.5, rMin = 135, rMax = 250;
 
-export function AdjacencyMap({ adj }: { adj: ReportModel["adjacency"] }) {
+export function AdjacencyMap({
+  adj,
+  subjectName,
+}: {
+  adj: ReportModel["adjacency"];
+  /** Display alias of the subject at the centre. Falls back to "SUBJECT" when absent. */
+  subjectName?: string;
+}) {
   const [hover, setHover] = useState<number | null>(null);
 
   const dists = adj.map((a) => a.distanceMi);
@@ -74,7 +81,13 @@ export function AdjacencyMap({ adj }: { adj: ReportModel["adjacency"] }) {
         {/* subject clearly at center */}
         <circle cx={cx} cy={cy} r="27" fill="none" stroke="var(--primary)" strokeWidth="1" strokeDasharray="2 3" opacity="0.6" />
         <circle cx={cx} cy={cy} r="17" fill="var(--primary)" stroke="var(--ground)" strokeWidth="4" />
-        <text x={cx} y={cy + 44} textAnchor="middle" fontFamily="var(--mono)" fontSize="13" fontWeight="700" fill="var(--ink)">SUBJECT · HOME</text>
+        {/* The centre is the subject, so name them rather than printing "SUBJECT". HOME
+            drops to a second muted line: it qualifies the point without competing with
+            the name, and a long alias no longer has to share one line with it. */}
+        <text x={cx} y={cy + 44} textAnchor="middle" fontFamily="var(--mono)" fontSize="13" fontWeight="700" fill="var(--ink)">
+          {(subjectName ?? "Subject").toUpperCase()}
+        </text>
+        <text x={cx} y={cy + 59} textAnchor="middle" fontFamily="var(--mono)" fontSize="10.5" fill="var(--muted)">HOME</text>
         {placed.map((p, i) => {
           const above = p.y < cy - 6;
           return (

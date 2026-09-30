@@ -110,7 +110,7 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
         <section id="adjacency">
           <div className="wrap">
             <div className="sec-head"><span className="eyebrow">Critical adjacency · utilities, government, military, HQs &amp; institutions</span><h2>Where the subject sits, relative to critical sites.</h2><p>Career- and education-relevant sites near the subject&apos;s cities, by proximity.</p></div>
-            <div className="card" style={{ padding: 14 }}><AdjacencyMap adj={m.adjacency} /></div>
+            <div className="card" style={{ padding: 14 }}><AdjacencyMap adj={m.adjacency} subjectName={m.alias.alias} /></div>
             <div className="legend" style={{ marginTop: 10 }}>
               <span><i style={{ background: "var(--address)" }} />Utility</span>
               <span><i style={{ background: "var(--primary)" }} />Government</span>

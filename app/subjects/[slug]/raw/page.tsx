@@ -57,6 +57,13 @@ export default async function RawPage({
         <ul className="min-h-0 overflow-auto border-b md:border-r md:border-b-0">
           {entries.map((e) => {
             const active = e.rel === file;
+            // Every subject carries one JSON envelope, and its filename is an internal
+            // convention rather than anything a reviewer needs. Label it for what it is
+            // and keep the real name in the tooltip. A subject with several JSON files
+            // keeps the filename, so the rows stay distinguishable.
+            const jsonCount = entries.filter((x) => x.rel.endsWith(".json")).length;
+            const label =
+              e.rel.endsWith(".json") && jsonCount === 1 ? "Raw JSON" : e.rel;
             return (
               <li key={e.rel} className="cv-auto">
                 <Link
@@ -66,7 +73,9 @@ export default async function RawPage({
                     active ? "bg-accent text-foreground" : "text-muted-foreground"
                   }`}
                 >
-                  <span className="min-w-0 flex-1 truncate">{e.rel}</span>
+                  <span className="min-w-0 flex-1 truncate" title={e.rel}>
+                    {label}
+                  </span>
                   {e.isError ? (
                     <Badge
                       variant="outline"
