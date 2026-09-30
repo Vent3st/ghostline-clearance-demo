@@ -24,10 +24,13 @@ const KIND_FILL: Record<string, string> = {
 const NodeGlyph = memo(function NodeGlyph({
   node,
   selected,
+  dimmed,
   onSelect,
 }: {
   node: Placed;
   selected: boolean;
+  /** Outside the current focus (legend filter or selected node's neighbourhood). */
+  dimmed?: boolean;
   onSelect: (id: string) => void;
 }) {
   const fill = KIND_FILL[node.kind] ?? "var(--muted-foreground)";
@@ -50,6 +53,7 @@ const NodeGlyph = memo(function NodeGlyph({
         }
       }}
       className="cursor-pointer focus:outline-none"
+      opacity={dimmed ? 0.13 : 1}
     >
       {node.kind === "org" ? (
         <rect
@@ -119,6 +123,8 @@ export function GraphCanvas({
   focused?: boolean;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
+  /** Legend filter. null = every kind shown; otherwise only these kinds stay lit. */
+  const [kinds, setKinds] = useState<Set<Placed["kind"]> | null>(null);
 
   // Built once per render rather than scanning `nodes` inside the edge loop.
   const byId = useMemo(() => new Map(nodes.map((n) => [n.id, n])), [nodes]);
@@ -285,9 +291,106 @@ export function GraphCanvas({
     apply();
   }, [viewBox, apply]);
 
+  // The selected node plus everything one hop from it: relatives, addresses, phones
+  // and employers all stay lit so the eye follows one subject's web.
+  const focusSet = useMemo(() => {
+    if (!selected) return null;
+    const keep = new Set<string>([selected]);
+    for (const e of edges) {
+      if (e.source === selected) keep.add(e.target);
+      else if (e.target === selected) keep.add(e.source);
+    }
+    return keep;
+  }, [selected, edges]);
+
+  const dimmedId = useCallback(
+    (n: Placed) => {
+      if (kinds && !kinds.has(n.kind)) return true;
+      if (focusSet && !focusSet.has(n.id)) return true;
+      return false;
+    },
+    [kinds, focusSet],
+  );
+
+  // Legend rows: only kinds actually present, with their counts.
+  const legend = useMemo(() => {
+    const order: Placed["kind"][] = ["person", "org", "address", "phone"];
+    const count = new Map<Placed["kind"], number>();
+    for (const n of nodes) count.set(n.kind, (count.get(n.kind) ?? 0) + 1);
+    const nameOf: Record<string, string> = {
+      person: "People",
+      org: "Employers",
+      address: "Addresses",
+      phone: "Phones",
+    };
+    return order
+      .filter((k) => count.has(k))
+      .map((k) => ({ kind: k, label: nameOf[k] ?? k, n: count.get(k) ?? 0 }));
+  }, [nodes]);
+
+  const toggleKind = useCallback((k: Placed["kind"]) => {
+    setKinds((prev) => {
+      const next = new Set(prev ?? []);
+      if (next.has(k)) next.delete(k);
+      else next.add(k);
+      return next.size === 0 ? null : next;
+    });
+  }, []);
+
   return (
     <div className="grid min-h-0 flex-1 grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px]">
       <div className="relative min-h-0 overflow-hidden">
+        {/*
+          Legend doubles as the filter. Each row is a toggle: lit kinds keep full
+          colour, everything else drops to 13% so attention lands where it was put.
+          Shapes match the glyphs, so the key reads without relying on colour.
+        */}
+        <div className="absolute left-3 top-3 z-10 rounded-md border bg-background/90 p-1.5 shadow-sm backdrop-blur">
+          <div className="flex flex-col gap-0.5">
+            {legend.map(({ kind, label, n }) => {
+              const lit = !kinds || kinds.has(kind);
+              return (
+                <button
+                  key={kind}
+                  type="button"
+                  onClick={() => toggleKind(kind)}
+                  aria-pressed={lit}
+                  title={`Show only ${label.toLowerCase()} — click again to restore`}
+                  className={`flex items-center gap-2 rounded px-1.5 py-1 text-left text-[11px] hover:bg-muted ${
+                    lit ? "text-foreground" : "text-muted-foreground/60"
+                  }`}
+                >
+                  <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden className={lit ? "" : "opacity-40"}>
+                    {kind === "person" ? (
+                      <circle cx="6" cy="6" r="5" fill={KIND_FILL[kind]} />
+                    ) : kind === "org" ? (
+                      <rect x="1" y="1" width="10" height="10" rx="1.5" fill={KIND_FILL[kind]} />
+                    ) : kind === "address" ? (
+                      <rect x="1" y="1" width="10" height="10" rx="1.5" fill={KIND_FILL[kind]} />
+                    ) : (
+                      <polygon points="6,1 11,11 1,11" fill={KIND_FILL[kind]} />
+                    )}
+                  </svg>
+                  <span className="flex-1">{label}</span>
+                  <span className="font-mono text-[10px] text-muted-foreground">{n}</span>
+                </button>
+              );
+            })}
+          </div>
+          {kinds || selected ? (
+            <button
+              type="button"
+              onClick={() => {
+                setKinds(null);
+                setSelected(null);
+              }}
+              className="mt-1 w-full rounded px-1.5 py-1 text-[10px] text-muted-foreground hover:bg-muted"
+            >
+              clear focus
+            </button>
+          ) : null}
+        </div>
+
         <div className="absolute right-3 top-3 z-10 flex items-center gap-1 rounded-md border bg-background/90 p-1 shadow-sm backdrop-blur">
           <button
             type="button"
@@ -338,6 +441,7 @@ export function GraphCanvas({
             const b = byId.get(e.target);
             if (!a || !b) return null;
             const active = selected === e.source || selected === e.target;
+            const faded = dimmedId(a) || dimmedId(b);
             // Relative scores run ~100–475, not 0–1.
             const w = e.score ? Math.min(3.2, 0.8 + e.score / 220) : 1;
             return (
@@ -353,7 +457,7 @@ export function GraphCanvas({
                 strokeWidth={active ? w + 1 : w}
                 vectorEffect="non-scaling-stroke"
                 strokeDasharray={e.sharedHousehold ? undefined : "0"}
-                opacity={selected ? (active ? 0.95 : 0.15) : 0.4}
+                opacity={faded ? 0.06 : selected ? (active ? 0.95 : 0.15) : 0.4}
               />
             );
           })}
@@ -363,6 +467,7 @@ export function GraphCanvas({
               key={n.id}
               node={n}
               selected={selected === n.id}
+              dimmed={dimmedId(n)}
               onSelect={setSelected}
             />
           ))}
@@ -379,6 +484,7 @@ export function GraphCanvas({
             .map((n) => (
               <text
                 key={`label-${n.id}`}
+                opacity={dimmedId(n) ? 0.16 : 1}
                 x={n.x}
                 y={n.y + (n.anchorSlug ? 13 : 8) + 13}
                 textAnchor="middle"

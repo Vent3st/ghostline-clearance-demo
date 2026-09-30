@@ -74,15 +74,27 @@ export function ResidencyTimeline({ spans }: { spans: ResidencySpan[] }) {
                     title={`${s.addressLabel} · ${year(from)}–${
                       s.to ? year(to) : "still reported"
                     }`}
-                    className={`absolute top-0 flex h-[18px] items-center overflow-hidden rounded px-1.5 text-[9px] text-background ${
-                      shared ? "ring-2 ring-primary ring-inset" : ""
-                    }`}
+                    /*
+                      One hue, two states. The previous version painted white text on a
+                      55%-transparent green and outlined the shared ones in the primary
+                      accent — two competing hues plus text that lost contrast as the
+                      fill faded. Now the state is carried by tint depth and border
+                      weight within the address hue, and the label uses --foreground so
+                      it stays legible in both themes.
+                    */
+                    className="absolute top-0 flex h-[18px] items-center overflow-hidden rounded-[3px] border px-1.5 text-[9px] font-medium text-foreground"
                     style={{
                       left: `${left}%`,
                       width: `${width}%`,
                       background: shared
+                        ? "color-mix(in srgb, var(--ent-address) 34%, var(--card))"
+                        : "color-mix(in srgb, var(--ent-address) 15%, var(--card))",
+                      borderColor: shared
                         ? "var(--ent-address)"
-                        : "color-mix(in srgb, var(--ent-address) 55%, transparent)",
+                        : "color-mix(in srgb, var(--ent-address) 38%, transparent)",
+                      boxShadow: shared
+                        ? "inset 2px 0 0 0 var(--ent-address)"
+                        : undefined,
                     }}
                   >
                     <span className="truncate">{s.addressLabel}</span>
