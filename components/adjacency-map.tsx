@@ -27,10 +27,13 @@ const xStretch = 1.5, rMin = 135, rMax = 250;
 export function AdjacencyMap({
   adj,
   subjectName,
+  focusHref,
 }: {
   adj: ReportModel["adjacency"];
   /** Display alias of the subject at the centre. Falls back to "SUBJECT" when absent. */
   subjectName?: string;
+  /** When given, the centre name opens this subject's focused graph. */
+  focusHref?: string;
 }) {
   const [hover, setHover] = useState<number | null>(null);
 
@@ -84,9 +87,37 @@ export function AdjacencyMap({
         {/* The centre is the subject, so name them rather than printing "SUBJECT". HOME
             drops to a second muted line: it qualifies the point without competing with
             the name, and a long alias no longer has to share one line with it. */}
-        <text x={cx} y={cy + 44} textAnchor="middle" fontFamily="var(--mono)" fontSize="13" fontWeight="700" fill="var(--ink)">
-          {(subjectName ?? "Subject").toUpperCase()}
-        </text>
+        {focusHref ? (
+          /*
+            A native SVG <a>, not next/link: inside an <svg> React creates the element in
+            the SVG namespace, and next/link's handler did not navigate from it (verified
+            — the click left the URL unchanged). The href attribute works natively here.
+            No <title> child, or it would join the anchor's text content.
+          */
+          <a href={focusHref} aria-label={`Open the focused graph for ${subjectName ?? "this subject"}`}>
+            <text
+              x={cx}
+              y={cy + 44}
+              textAnchor="middle"
+              fontFamily="var(--mono)"
+              fontSize="13"
+              fontWeight="700"
+              fill="var(--ink)"
+              style={{
+                cursor: "pointer",
+                textDecoration: "underline",
+                textDecorationStyle: "dotted",
+                textUnderlineOffset: 3,
+              }}
+            >
+              {(subjectName ?? "Subject").toUpperCase()}
+            </text>
+          </a>
+        ) : (
+          <text x={cx} y={cy + 44} textAnchor="middle" fontFamily="var(--mono)" fontSize="13" fontWeight="700" fill="var(--ink)">
+            {(subjectName ?? "Subject").toUpperCase()}
+          </text>
+        )}
         <text x={cx} y={cy + 59} textAnchor="middle" fontFamily="var(--mono)" fontSize="10.5" fill="var(--muted)">HOME</text>
         {placed.map((p, i) => {
           const above = p.y < cy - 6;
