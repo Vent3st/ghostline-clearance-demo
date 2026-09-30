@@ -239,6 +239,25 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
         </section>
       ) : null}
 
+      <section id="risk">
+        <div className="wrap">
+          <div className="sec-head"><span className="eyebrow">Risk indicators</span><h2>What the system flags — and why.</h2></div>
+          <div className="risks">
+            {m.risks.map((r, i) => (
+              <div className={`rk ${r.sev === "warning" ? "warning" : ""}`} key={i}>
+                <span className="ico">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" /><path d="M8 5v3.4M8 10.6v.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
+                </span>
+                <div><h4>{r.title}</h4><div className="src">{r.source}</div></div>
+                {/* Only warnings carry a severity chip. "○ Info" repeated down every
+                    row was noise: the absence of a chip already means informational. */}
+                {r.sev === "warning" ? <span className="sev warning">● Warning</span> : null}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {(m.recordsByCategory.length > 0 || m.activityByYear.length > 0) ? (
         <section id="records">
           <div className="wrap">
@@ -274,22 +293,6 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
         </section>
       ) : null}
 
-      <section id="risk">
-        <div className="wrap">
-          <div className="sec-head"><span className="eyebrow">Risk indicators</span><h2>What the system flags — and why.</h2></div>
-          <div className="risks">
-            {m.risks.map((r, i) => (
-              <div className={`rk ${r.sev === "warning" ? "warning" : ""}`} key={i}>
-                <span className="ico">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5" /><path d="M8 5v3.4M8 10.6v.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" /></svg>
-                </span>
-                <div><h4>{r.title}</h4><div className="src">{r.source}</div></div>
-                <span className={`sev ${r.sev === "warning" ? "warning" : ""}`}>{r.sev === "warning" ? "● Warning" : "○ Info"}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
