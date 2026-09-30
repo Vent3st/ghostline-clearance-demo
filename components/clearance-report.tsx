@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { Activity, AtSign, BookOpen, Bookmark, Briefcase, Camera, Clapperboard, Code, Globe, GraduationCap, Hash, Link2, MessagesSquare, Mic, Music, Palette, Play, Tv, Users } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import type { ReportModel } from "@/lib/report";
 import { bandColor, scoreBand } from "@/lib/utils";
@@ -27,6 +29,35 @@ const ADJ_COLOR: Record<string, string> = {
 };
 
 /** Critical-adjacency proximity map — subject/home at center, sites placed by distance. */
+/**
+ * Platform glyphs.
+ *
+ * lucide-react v1 ships no brand icons, and copying brand marks into a proprietary
+ * demo is not worth the trademark question, so each platform maps to a meaningful
+ * shipped glyph instead: what the platform is for, not whose logo it is. Tinted by
+ * kind, because the professional/casual split is the distinction that matters here.
+ */
+const SOCIAL_ICON: Record<string, LucideIcon> = {
+  LinkedIn: Briefcase,
+  GitHub: Code,
+  "Google Scholar": GraduationCap,
+  ResearchGate: BookOpen,
+  Behance: Palette,
+  "Personal site": Globe,
+  "Speaker profile": Mic,
+  X: Hash,
+  Instagram: Camera,
+  Reddit: MessagesSquare,
+  TikTok: Music,
+  Facebook: Users,
+  Strava: Activity,
+  Pinterest: Bookmark,
+  Twitch: Tv,
+  YouTube: Play,
+  Mastodon: AtSign,
+  Letterboxd: Clapperboard,
+};
+
 /** 1_200 -> "1.2k", 48_000 -> "48k" — reach is an order-of-magnitude claim, not a count. */
 function fmtReach(n: number): string {
   if (n >= 1000) {
@@ -230,24 +261,6 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
         </section>
       ) : null}
 
-      {m.relatives.length > 0 ? (
-        <section id="relatives">
-          <div className="wrap">
-            <div className="sec-head"><span className="eyebrow">Relatives &amp; associates</span><h2>The people around the subject.</h2></div>
-            <div className="card pad">
-              <div className="srclist">
-                {m.relatives.map((r, i) => (
-                  <div className="sr" key={i}>
-                    <span className="n"><b>{r.name}</b> · {r.relationship}{r.location ? ` · ${r.location}` : ""}</span>
-                    <span className="m" style={{ color: bandColor(scoreBand(r.score)) }}>{scoreBand(r.score) ? `${scoreBand(r.score)} likelihood` : "—"}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
       {m.social.length > 0 ? (
         <section id="social">
           <div className="wrap">
@@ -278,7 +291,31 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
                     <div className="srclist">
                       {rows.map((x, i) => (
                         <div className="sr" key={i}>
-                          <span className="n">
+                          <span className="n" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                            {(() => {
+                              const Icon = SOCIAL_ICON[x.platform] ?? Link2;
+                              return (
+                                <span
+                                  aria-hidden
+                                  style={{
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    width: 22,
+                                    height: 22,
+                                    flex: "0 0 auto",
+                                    borderRadius: 5,
+                                    background:
+                                      kind === "professional"
+                                        ? "color-mix(in srgb, var(--primary) 16%, transparent)"
+                                        : "color-mix(in srgb, var(--phone) 18%, transparent)",
+                                    color: kind === "professional" ? "var(--primary)" : "var(--phone)",
+                                  }}
+                                >
+                                  <Icon size={13} strokeWidth={2} />
+                                </span>
+                              );
+                            })()}
                             <b>{x.platform}</b>{" "}
                             <span style={{ fontFamily: "var(--mono)" }}>@{x.handle}</span>
                             {x.verified ? (
@@ -301,6 +338,24 @@ export function ClearanceReport({ model: m, graphHref }: { model: ReportModel; g
               Handles only — no platform API was queried and no private content is represented.
               Fictional sample data.
             </p>
+          </div>
+        </section>
+      ) : null}
+
+      {m.relatives.length > 0 ? (
+        <section id="relatives">
+          <div className="wrap">
+            <div className="sec-head"><span className="eyebrow">Relatives &amp; associates</span><h2>The people around the subject.</h2></div>
+            <div className="card pad">
+              <div className="srclist">
+                {m.relatives.map((r, i) => (
+                  <div className="sr" key={i}>
+                    <span className="n"><b>{r.name}</b> · {r.relationship}{r.location ? ` · ${r.location}` : ""}</span>
+                    <span className="m" style={{ color: bandColor(scoreBand(r.score)) }}>{scoreBand(r.score) ? `${scoreBand(r.score)} likelihood` : "—"}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       ) : null}
