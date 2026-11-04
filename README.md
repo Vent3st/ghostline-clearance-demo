@@ -1,6 +1,8 @@
 # Ghostline — Clearance-Vetting Workbench (Demo)
 
-**Live demo → https://ghostline-clearance-demo.vercel.app**
+> **Note (2026-11): the hosted demo is offline.** This project was consolidated into the private Ghostline platform, and this public Vercel deployment has been retired. The code here still runs locally — see the run instructions below.
+
+**Hosted demo: retired (see note above). Run it locally instead.**
 
 No login, no signup, no API keys. Land on the page, click **Launch demo →**, and you are in
 the clearance queue.
@@ -17,7 +19,7 @@ clearance dossier. One platform, two depths.
 
 ## The 60-second path through it
 
-1. **https://ghostline-clearance-demo.vercel.app** — the marketing landing page. `/` redirects here.
+1. The marketing landing page (`/` redirects here) — in a local run.
 2. Click **Launch demo →** (top-right, or in the hero) — no gate, no form.
 3. **`/subjects`** — the clearance queue, 12 subjects under deterministic pseudonyms.
 4. Open **Marcus "Cash" Reyes** — the sourced dossier: confidence gauge, critical-adjacency map,
